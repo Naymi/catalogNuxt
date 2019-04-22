@@ -1,0 +1,46 @@
+.shks
+  margin-top: 3em
+  &-sort
+    &__item, &__label
+      padding: .5em
+      margin: .5em
+    &__item
+      cursor: pointer
+  &-content
+    display: grid
+    grid-gap: 20px
+    grid-template-columns: repeat(auto-fill, 300px)
+.shk
+  box-shadow: 0 2px 11px 1px rgba(133, 156, 179, 0.07)
+  border-radius: 10px
+  background-color: #ffffff
+  position: relative
+  height: 450px
+  overflow: hidden
+  perspective: 10000px
+  &-price
+    top: 100%
+    right: 0
+    margin-bottom: 100%
+    position: absolute
+  &-ref
+    position: absolute
+    bottom: 20px
+    right: 20px
+  &-content
+    padding: 10px
+    > *
+      margin: 10px 0
+  .calc_card
+    transform: rotateY(180deg)
+    &__divider
+      width: 40%
+      height: 5px
+      border-radius: 3px
+      background-color: #ffffff
+    > *
+      margin: 15px 0
+    &__btn
+      background-color: #0894ed
+      padding: 15px 40px
+      border-radius: 10px
