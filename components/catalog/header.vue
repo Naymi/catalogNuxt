@@ -1,6 +1,10 @@
 <template lang="pug">
 header.header.color-white
-  .container.box-center
+  .container.box-center.flex.flex-column(
+    style={
+      height: '100%',
+    }
+  )
     .header-head.flex.box-center.align-center.justify-between
       .header-logo.flex.align-center
         .header-logo__img
@@ -10,19 +14,38 @@ header.header.color-white
           в новостройках Владимира<br>
           от надежных застройщиков без комиссии
       .contacts
-        .wrapper
+        .wrapper.flex
           .contacts-icon
             img(src="/img/phone.svg", alt="")
           .contacts-phone.fz53.bold.text-right 377-076
         .contacts-description.fz18 Отдел недвижимости ВГИФ
-    .header-content
-      .header-description
-        .description-head.fz30.bold.
-          Новостройки Владимира <br>
-          от проверенных застройщиков
-        .description-content.fz18.
-          Подбор квартир в новостройках Владимира <br>
-          от надежных застройщиков без комиссии <br>
-          от отдела недвижимости Владимирского ипотечного фонда
-        button.header-btn.color-white Посмотреть новостроки в продаже
+    .header-content.flex.space-between.align-center
+      .flex.justify-between(
+        style={
+          width: '100%'
+        }
+      )
+        .header-section
+          .description-head.fz30.bold.
+            Новостройки Владимира <br>
+            от проверенных застройщиков
+          .description-content.fz18.
+            Подбор квартир в новостройках Владимира <br>
+            от надежных застройщиков без комиссии <br>
+            от отдела недвижимости Владимирского ипотечного фонда
+          button.header-btn.color-white Посмотреть новостроки в продаже
+        .header-section.flex.justify-right.flex-column.align-end.justify-right
+          .fz18.bold ЖК Династия - дом Лазарев
+          .fz13 Кирпичный дом на ул.Диктора Левитана
+          a.color-white.fz13(
+            href='//жк-династия33.рф/promo.html'
+            target='blank'
+            style={
+              padding: '5px 10px',
+              background: 'red',
+              boxShadow: '0 3px 8px 1px rgba(46, 41, 42, 0.31)',
+              borderRadius: '10px',
+              backgroundColor: '#ac1c1d'
+            }
+          ) Акции и спецпередложения в апреле
 </template>
