@@ -7,7 +7,7 @@
       Выберите один или несколько банков и заполните заявку на ипотеку
   .wrapper-banks
     .banks
-      bank(v-for='bank in banks' @pickbank='tmp = event' :bank='bank' :key='bank.icon' )
+      bank(v-for='bank in banks' @pickbank='pickbank' :bank='bank' :key='bank.icon' )
 </template>
 
 <script>
@@ -15,7 +15,7 @@ import bank from './bank'
 export default {
   props: ['banks'],
   methods: {
-    n(v) {
+    pickbank(v) {
       this.$emit('pickbank', v)
     }
   },
