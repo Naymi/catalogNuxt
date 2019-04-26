@@ -18,7 +18,7 @@
           label='Стоимость квартиры от 900 000 рублей'
           data-name='price'
           hide_border
-          :value='price'
+          :value='(+price).toLocaleString("ru")'
           :postfix='postfixRub(this.price)'
         )
         input-range(
@@ -31,17 +31,17 @@
           hide_border
           :label='firstInstallmentLabel'
           data-name='firstInstallment'
-          :value='firstInstallment'
+          :value='(+firstInstallment).toLocaleString("ru")'
           :postfix='postfixRub(this.firstInstallment)'
         )
         input-range(
           v-model='firstInstallment'
-          :min='~~(price * this.firstInstallmentKoef)'
+          :min='~~(price * firstInstallmentKoef)'
           :max='price - 500000'
         )
       .data-input
         input-text(
-          :value='value.creditTerm'
+          :value='(+value.creditTerm).toLocaleString("ru")'
           hide_border 
           label='Срок кредита'
           :postfix='creditTermPostfix'
@@ -49,7 +49,7 @@
         )
         input-range(
           v-model='creditTerm'
-          min='3',
+          min='3'
           max='30'
         )
       label.data-input.flex.align-center
@@ -57,7 +57,9 @@
           v-model='motherCapital'
         )
         span(style={
-          marginLeft: '10px'
+          marginLeft: '10px',
+          userSelect: 'none',
+          cursor: 'pointer'
         }) У меня есть материнский капитал
     .output-data.flex(
       style={
@@ -89,7 +91,17 @@
     .data-output
       .data-output__head {{firstInstallmentLabel}}
       .data-output__main {{(+firstInstallment).toLocaleString('ru')}} руб.
-    button.btn-blue.color-white.text-center Отправить заявку
+    button.btn-blue.color-white.text-center(
+      @click=`scroll("[data-target='banks']")`
+    ) Посмотреть предложения
+    .privacy(
+      style={
+        marginTop:'10px'
+      }
+    ).
+      *Рассчитанные параметры кредита являются предварительными.
+      Окончательные условия кредитования определяются после телефонной 
+      консультации с кредитным менеджером.
 </template>
 
 <style lang="sass" scoped>
@@ -103,7 +115,7 @@
 
 <style lang="sass">
 .data-output
-  margin: 1em 0
+  margin: 2em 0
   &__head
     opacity: 0.5
     color: #ffffff
@@ -136,20 +148,7 @@ import inputRange from '~/components/UI/inputs/range'
 import IMask from 'imask'
 import postfixYear from '~/assets/util/srcpostfixYear'
 import postfixRub from '~/assets/util/rub'
-// function Computed(prop) {
-//   return {
-//     get() {
-//       return this.value[prop.name]
-//     },
-//     set(v) {
-//       let mask = this.Masks.find(i => i.name == prop.name).mask
-//       // console.log("mask :", mask.unmaskedValue)
-//       let tmp = {}
-//       tmp[prop.name] = v
-//       this.$emit('input', { ...this.value, ...tmp })
-//     }
-//   }
-// }
+import scroll from '~/assets/scroll'
 let masks = [
   {
     name: 'price',
@@ -162,16 +161,12 @@ let masks = [
     },
     call(masks, mask) {
       const firstmask = masks.find(el => el.name === 'firstInstallment').mask
-      // global.console.log('firstmask :', firstmask)
-      // global.console.log('mask :', mask.unmaskedValue)
-      firstmask.updateOptions({
-        min: ~~(+mask.unmaskedValue * 0.15),
-        max: +mask.unmaskedValue - 500000
-      })
-      // global.console.log(
-      //   '+mask.unmaskedValue * 0.15 :',
-      //   +mask.unmaskedValue * 0.15
-      // )
+
+      mask.typedValue >= mask.masked.min &&
+        firstmask.updateOptions({
+          min: ~~(mask.typedValue * (this.value.motherCapital ? 0.1 : 0.15)),
+          max: mask.typedValue - 500000
+        })
     }
   },
   {
@@ -182,13 +177,13 @@ let masks = [
       min: ~~(100e3 * 0.15),
       max: 1000e3 - 500e3,
       thousandsSeparator: ' '
+    },
+    call(masks, mask) {
+      const v = mask.typedValue
+      v <= mask.masked.max &&
+        v >= mask.masked.min &&
+        (this.value.firstInstallment = v)
     }
-    // call(masks) {
-    //   console.log("call this :", this)
-    //   console.log("masks :", masks)
-    //   let pricemask = masks.find(el => el.name == "price").mask
-    //   console.log("pricemask :", pricemask)
-    // }
   },
   {
     name: 'creditTerm',
@@ -202,11 +197,9 @@ let masks = [
   }
 ]
 export default {
-  created() {
-    console.log('this.value :', this.value)
-  },
   methods: {
-    postfixRub
+    postfixRub,
+    scroll
   },
   computed: {
     creditAmount() {
@@ -219,7 +212,7 @@ export default {
       return this.motherCapital ? 0.1 : 0.15
     },
     firstInstallmentLabel() {
-      return 'Первый взнос ' + (this.motherCapital ? 'от 10%' : 'от 15%')
+      return `Первый взнос (${this.motherCapital ? 'от 10%' : 'от 15%'})`
     },
     price: {
       get() {
@@ -285,48 +278,25 @@ export default {
             const startValue = document.querySelector(
               `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
             ).value
-            console.log('i :', i)
-            console.info(`value before ${i.name}:`, startValue)
             const mask = new IMask(
               document.querySelector(
                 `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
               ),
               i.params
             )
-            console.info(
-              `value after ${i.name}:`,
-              document.querySelector(
-                `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
-              ).value
-            )
-            // mask.el.input.addEventListener("blur", event => {
-            //   console.log("blur on", event.target.value)
-            //   console.log("blur on", mask.value)
-            //   setTimeout(() => {
-            //     console.log("blur out", event.target.value)
-            //     console.log("blur out", mask.value)
-            //     event.target.value = mask.value
-            //   }, 0)
-            // })
             mask.on('accept', () => {
-              global.console.log('accept', event)
               const tmp = {}
-              tmp[i.name] = mask.unmaskedValue
+              tmp[i.name] = mask.typedValue
               i.call && i.call.call(this, masks, mask)
-              this.$emit('input', { ...this.value, ...tmp })
-            })
-            // document.querySelector(
-            //   `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
-            // ).value = startValue
-            mask.on('complete', () => {
-              global.console.log('complete')
+              mask.typedValue >= mask.masked.min &&
+                this.$emit('input', { ...this.value, ...tmp })
+              console.log('this.value after accept :', this.value)
             })
             return mask
           })()
         }
       }
     })
-    // this.Masks.map(i => console.log(i))
   },
   components: {
     inputText,
