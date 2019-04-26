@@ -1,17 +1,33 @@
 <template lang="pug">
-label.main(:class='error ? "error" : ""')
-  input.input(
-    :value='v'
-    :style='hide_border !== undefined ? "border: none" : ""'
-    required
-  )
-  .label {{ label }}
-  .postfix {{ postfix }}
+.block(
+  style='max-width: 100%'
+)
+  label.main(:class='error ? "error" : ""')
+    input.input(
+      :value='v'
+      :style='hide_border !== undefined ? "border: none" : ""'
+      required
+      :name='name'
+      :class='dark ? "dark" : ""'
+    )
+    .label {{ label }}
+    .postfix(
+      :style='color ? `color: ${color}` : ""'
+    ) {{ postfix }}
 </template>
 
 <script>
 export default {
-  props: ['label', 'value', 'error', 'postfix', 'hide_border'],
+  props: [
+    'label',
+    'value',
+    'error',
+    'postfix',
+    'hide_border',
+    'name',
+    'color',
+    'dark'
+  ],
   mounted() {
     this.el = this.$el
   },
@@ -23,7 +39,7 @@ export default {
   },
   computed: {
     v() {
-      return (+this.value).toLocaleString('ru')
+      return this.value
     }
   }
 }
@@ -34,23 +50,23 @@ $color: white
 .main
   position: relative
 
-  display: inline-block
+  display: block
 
   width: 100%
-  padding-top: .5em
+  padding-top: 1em
 
 
   font-size: 17px
   font-size: 20px
   .label
     position: absolute
-    top: .5em
+    top: 1em
 
     cursor: text
     transition: .2s all
 
     opacity: .5
-    color: $color
+    color: inherit
     &.active
       top: 0
 
@@ -65,16 +81,20 @@ $color: white
     right: 0
     bottom: 0
 
-    color: white
+    color: inherit
   .input
     width: 100%
+    padding-bottom: .2em
 
-    color: white
-    border-bottom: 1px solid $color
+    color: inherit
+    border-bottom: 1px solid white
     outline: none
     background: transparent
 
     font: inherit
+    &.dark
+      border-bottom: 1px solid black
+
     &:focus ~ .label, &:valid ~ .label
       top: 0
 
