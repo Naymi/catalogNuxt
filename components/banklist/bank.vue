@@ -81,7 +81,6 @@ export default {
       this.$emit('pickbank', v)
     }
   },
-  data: {},
   props: ['bank'],
   computed: {
     stavka() {
@@ -111,11 +110,6 @@ export default {
   box-shadow: 0 0 6px 1px rgba(60, 61, 65, 0.05)
   // height: 325px
 
-
-
-
-
-
   backface-visibility: hidden
   .logo
     &__img
@@ -127,8 +121,10 @@ export default {
     .back
       transform: rotateY(0deg)
   .core
+    border-radius: 10px
     transition: .2s all
   .back
+    border-radius: 10px
     position: absolute
     z-index: 1
     top: 0
