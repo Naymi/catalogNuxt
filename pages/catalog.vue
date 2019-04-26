@@ -3,6 +3,7 @@
   catalog-header
   catalog-main
   .bold.text-center.fz32(
+    data-target='calc'
     style={
       marginTop: '2em'
     }
@@ -18,8 +19,11 @@
     @input='input'
   )
   bank-list(
+    data-target='banks'
     :banks='banks'
+    @pickbank='pickbank'
   )
+  modal(v-model='modal')
 </template>
 
 <script>
@@ -28,12 +32,14 @@ import catalogMain from '~/components/catalog/main'
 import catalogCalc from '~/components/catalog/calc'
 import bankList from '~/components/banklist'
 import getBanks from '~/assets/api'
+import modal from '~/components/catalog/modal'
 export default {
   components: {
     bankList,
     catalogHeader,
     catalogMain,
-    catalogCalc
+    catalogCalc,
+    modal
   },
   computed: {
     banks() {
@@ -58,6 +64,9 @@ export default {
     getBanks,
     input(v) {
       console.log('v :', v)
+    },
+    pickbank(v) {
+      this.modal = true
     }
   },
   watch: {
@@ -69,6 +78,7 @@ export default {
     const firstInstallment = 500e3,
       price = 1000e3
     return {
+      modal: false,
       data: {
         type: 'Новостройка',
         target: 'Квартира',
