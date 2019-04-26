@@ -2,6 +2,7 @@
 .main
   shks(
     :data='shksdata'
+    data-target='shks'
   )
   unready
 </template>
