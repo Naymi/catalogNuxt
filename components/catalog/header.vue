@@ -33,7 +33,9 @@ header.header.color-white
             Подбор квартир в новостройках Владимира <br>
             от надежных застройщиков без комиссии <br>
             от отдела недвижимости Владимирского ипотечного фонда
-          button.header-btn.color-white Посмотреть новостроки в продаже
+          button.header-btn.color-white(
+            @click=`scroll("[data-target='shks']")`
+          ) Посмотреть новостроки в продаже
         .header-section.flex.justify-right.flex-column.align-end.justify-right
           .fz18.bold ЖК Династия - дом Лазарев
           .fz13 Кирпичный дом на ул.Диктора Левитана
@@ -49,3 +51,12 @@ header.header.color-white
             }
           ) Акции и спецпередложения в апреле
 </template>
+
+<script>
+import scroll from '~/assets/scroll'
+export default {
+  methods: {
+    scroll
+  }
+}
+</script>
