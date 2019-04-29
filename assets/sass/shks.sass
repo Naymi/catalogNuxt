@@ -1,6 +1,13 @@
 .shks
   margin-top: 3em
   &-sort
+    flex-wrap: wrap
+    @media screen and (max-width: 600px)
+      font-size: 0.9em
+      &__label
+        width: 100%
+      &__item
+        font-size: 10px
     &__item, &__label
       margin: .5em
       padding: .5em
@@ -8,22 +15,25 @@
       cursor: pointer
       user-select: none
   &-content
-    display: grid
-
-    grid-gap: 20px
-    grid-template-columns: repeat(auto-fill, 300px)
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    @media screen and (max-width: 600px)
+      justify-content: center
 .shk
   position: relative
 
   overflow: hidden
 
+  max-width: 300px
   height: 450px
+
+  cursor: pointer
 
   border-radius: 10px
   background-color: #ffffff
-  box-shadow: 0 2px 11px 1px rgba(133, 156, 179, 0.07)
+  box-shadow: 0 2px 11px 1px rgba(133, 156, 179, 0.13)
 
-  perspective: 10000px
   &-price
     position: absolute
     top: 100%
@@ -56,20 +66,37 @@
       border-radius: 10px
       background-color: #0894ed
   &-back
+    width: 300px
     height: 100%
+    height: 450px
+    padding-top: 70px
+    padding-bottom: 38px
 
     cursor: pointer
 
     border-radius: 10px
+    &__image
+      display: flex
+      justify-content: center
+
+      margin-bottom: 30px
+    &__title
+      margin-bottom: 20px
     &__divider
+      display: block
+
       width: 40%
       height: 5px
 
       border-radius: 3px
       background-color: #ffffff
-    > *
-      margin: 15px 0
+    &__description
+      margin-bottom: 80px
+      padding-top: 20px
     &__btn
+      display: block
+
+      width: max-content
       padding: 15px 40px
 
       border-radius: 10px 

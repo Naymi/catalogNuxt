@@ -7,14 +7,16 @@ div
 import IMask from 'imask'
 import inputText from '~/components/UI/inputs/text'
 export default {
-  props: ['getInput', 'input'],
+  props: ['getInput', 'input', 'mask', 'regExp'],
   components: {
     inputText
   },
   mounted() {
-    let input = input || this.getInput(this)
+    let propMask = this.regExp ? new RegExp(this.mask) : this.mask
+    console.log('propMask :', propMask)
+    let input = this.input || this.getInput(this)
     let mask = new IMask(input, {
-      mask: '+{7}(000)000-00-00',
+      mask: propMask,
       lazy: false
     })
     mask.on(
@@ -23,7 +25,12 @@ export default {
         this.$emit('input', event.target.value) &&
         this.$emit('complete', event.target.value)
     )
-    mask.on('accept', e => this.$emit('input', event.target.value))
+    mask.on(
+      'accept',
+      e =>
+        this.$emit('input', event.target.value) &&
+        this.$emit('accept', event.target.value)
+    )
   }
 }
 </script>

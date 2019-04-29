@@ -1,7 +1,12 @@
 <template lang="pug">
 .main
   catalog-header
-  catalog-main
+  shks(
+    :data='shksdata'
+    data-target='shks'
+    @picknovostroyka='picknovostroyka'
+  )
+  unready
   .bold.text-center.fz32(
     data-target='calc'
     style={
@@ -23,21 +28,25 @@
     :banks='banks'
     @pickbank='pickbank'
   )
-  modal(v-model='modal')
+  modal(v-model='modal' @complete='completeModal')
 </template>
 
 <script>
 import catalogHeader from '~/components/catalog/header'
-import catalogMain from '~/components/catalog/main'
+import shks from '~/components/catalog/shks'
+import unready from '~/components/catalog/unready'
+import shksdata from '~/assets/api/shks.json'
 import catalogCalc from '~/components/catalog/calc'
 import bankList from '~/components/banklist'
 import getBanks from '~/assets/api'
 import modal from '~/components/catalog/modal'
+import startValue from '~/assets/startValue'
 export default {
   components: {
+    unready,
+    shks,
     bankList,
     catalogHeader,
-    catalogMain,
     catalogCalc,
     modal
   },
@@ -61,11 +70,29 @@ export default {
     }
   },
   methods: {
+    send() {
+      this.$axios.$post('/api/', this.parcel).then(data => console.log(data))
+    },
+    completeModal(v) {
+      this.parcel.data = { ...this.parcel.data, ...v }
+      this.send()
+    },
     getBanks,
     input(v) {
       console.log('v :', v)
     },
     pickbank(v) {
+      this.parcel.from = {
+        target: 'Карточка банка',
+        data: v
+      }
+      this.modal = true
+    },
+    picknovostroyka(v) {
+      this.parcel.from = {
+        target: 'Карточка ЖК',
+        data: v
+      }
       this.modal = true
     }
   },
@@ -75,9 +102,15 @@ export default {
     }
   },
   data() {
-    const firstInstallment = 500e3,
-      price = 1000e3
+    const firstInstallment = startValue.firstInstallment,
+      price = startValue.price
     return {
+      parcel: {
+        from: null,
+        to: null,
+        data: null
+      },
+      shksdata,
       modal: false,
       data: {
         type: 'Новостройка',

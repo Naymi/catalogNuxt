@@ -22,8 +22,12 @@ section.shks.container-940.box-center
           :class = 'sorter.col === "sell" ? sorter.desc ? "visible" : "visible active" : ""'
         )
   .shks-content
-    .item(v-for='shk in shks' :key='String(shk.name)')
-      .shk(v-if='shk.name!=="card"')
+    .item(
+      v-for='(shk, index) in shks'
+      :key='String(shk.name)'
+      style='margin-top: 20px; max-width: 300px'
+    )
+      .shk(v-if='shk.name!=="card"' @click='$emit("picknovostroyka", shk)')
         .shk-img
           img(src="/img/shks/1.jpg", alt="")
         .shk-content
@@ -31,7 +35,7 @@ section.shks.container-940.box-center
           .shk-title.bold.fz15 {{ shk.name }}
           .shk-address.fz13(v-html='shk.address')
           .shk-cost
-            span от
+            span от 
             div(
               style={
                 display: 'inline-block',
@@ -43,19 +47,19 @@ section.shks.container-940.box-center
             span  руб.
           div.text-right.shk-ref.fz13
             a(href='#' target='blank') Узнать больше >>
-      .shk-back.color-white.flex.justify-center.flex-column.align-center.back-blue(
+      .shk-back.color-white.back-blue(
         v-else
         @click=`scroll('[data-target="calc"]')`
       )
         .shk-back__image
           img(src='/img/calc.svg' height='70' width='60')
-        .shk-back__title.fz20.bold.text-uppercase Ипотека от ВГИФ
-        hr.shk-back__divider
-        .shk-back__description.text-center.
+        .shk-back__title.fz20.bold.text-uppercase.text-center Ипотека от ВГИФ
+        hr.shk-back__divider.box-center
+        .shk-back__description.fz13.text-center.
           Рассчитайте ипотеку на новостройку<br>
           сразу в нескольких банках<br>
           на сайте прямо сейчас
-        button(tabindex=-1).shk-back__btn.color-white.back-blue.cursor-pointer Рассчитать ипотеку
+        button(tabindex=-1).shk-back__btn.color-white.back-blue.cursor-pointer.box-center Рассчитать ипотеку
 
 </template>
 
@@ -135,8 +139,10 @@ export default {
 
 <style>
 .mmm {
-  margin: 0;
-  text-transform: uppercase;
   top: 0;
+
+  margin: 0;
+
+  text-transform: uppercase;
 }
 </style>

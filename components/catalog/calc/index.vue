@@ -1,11 +1,5 @@
 <template lang="pug">
-.main(:data-id='mainSelector' style={
-  display: 'grid',
-  gridTemplateColumns:'repeat(2, 1fr)',
-  gridColumnGap: '78px',
-  padding: '35px',
-  borderRadius: '10px'
-}).color-white.container-940.box-center
+.main-container(:data-id='mainSelector').color-white.container-940.box-center
   .section
     .target(
       style={
@@ -149,6 +143,7 @@ import IMask from 'imask'
 import postfixYear from '~/assets/util/srcpostfixYear'
 import postfixRub from '~/assets/util/rub'
 import scroll from '~/assets/scroll'
+import startValue from '~/assets/startValue'
 let masks = [
   {
     name: 'price',
@@ -174,8 +169,8 @@ let masks = [
     params: {
       mask: Number,
       scale: 0,
-      min: ~~(100e3 * 0.15),
-      max: 1000e3 - 500e3,
+      min: ~~(startValue.price * 0.15),
+      max: startValue.price - 500e3,
       thousandsSeparator: ' '
     },
     call(masks, mask) {
@@ -315,10 +310,19 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-.main
-  background: #1867c0
-  .section
-    width: 100%
-    max-width: 380px
+<style scoped>
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  padding: 2em;
+
+  border-radius: 10px;
+  background: #1867c0;
+}
+.main-container .section {
+  width: 100%;
+  max-width: 380px;
+}
 </style>

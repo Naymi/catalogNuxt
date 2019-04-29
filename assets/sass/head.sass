@@ -7,9 +7,15 @@
   &-head
     width: 100%
     padding-top: 20px
+    @media screen and (max-width: 1000px)
+      justify-content: flex-start
+
   &-logo
+    margin-right: 20px
     &__description
       margin-left: 20px
+      @media screen and (max-width: 1000px)
+        display: none
   &-content
     height: 100%
     margin-top: 10px
@@ -24,3 +30,7 @@
     border-radius: 10px
     background-color: #0894ed
     box-shadow: 0 3px 8px 1px rgba(46, 41, 42, 0.31)
+.contacts
+  &-phone
+    @media screen and (max-width: 400px)
+      font-size: 20px
