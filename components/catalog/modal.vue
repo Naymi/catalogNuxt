@@ -3,25 +3,30 @@
   :class='v ? "active" : ""'
   @click='closeModal'
 )
-  .modal.container-940
+  .modal
     .modal-head.text-center.fz20 Почти готово!
     .modal-sub-head.text-center.fz16 Оставьте свои контактные данные**
-    .inputs
+    form(
+      @submit="checkForm"
+    ).inputs
       input-text(
         color='black'
         label='ФИО'
         name='name'
         dark='dark'
+        v-model='person.name'
+        :subtext=`nameSubtext`
       )
-      | {{person.phone}}
-      | {{typeof  tmp}}
-      inputPhone(
+      input-mask(
         :getInput='getPhoneInput'
         v-model='person.phone'
+        mask='+{7} (000) 000 00-00'
+        @complete='phoneValid = true'
+        @accept ='phoneValid = false'
       )
         input-text(
           @input='test'
-          v-model='tmp'
+          :dontEmit='true'
           slot='input'
           color='black'
           label='Номер телефона'
@@ -29,12 +34,14 @@
           dark='dark'
         )
       input-text(
+        slot='input'
         name='email'
         color='black'
         label='Email'
         dark='dark'
+        v-model='person.email'
       )
-    button.modal-btn.btn.text-uppercase.color-white.box-center Отправить
+      button.modal-btn.btn.text-uppercase.color-white.box-center Отправить
     .privacy.
       **Нажимая кнопку «Отправить заявку на ипотеку», вы соглашаетесь с условиями обработки персональных данных
 </template>
@@ -63,31 +70,44 @@
 <style lang="sass" scoped>
 .inputs
   *
-    margin: 10px
+    margin: 10px 0
 </style>
 
 
 <script>
 import inputText from '~/components/UI/inputs/text'
 import IMask from 'imask'
-import inputPhone from '~/components/UI/mask/phone'
+import inputMask from '~/components/UI/mask/'
+function validate(prop) {
+  return this.rules[prop].test(this.person[prop])
+}
 export default {
   data() {
     return {
+      phoneValid: false,
       person: {
-        phone: ''
+        phone: '',
+        name: '',
+        email: ''
       },
-      tmp: undefined
+      rules: {
+        name: /^[а-яё\ ]+$/i,
+        email: /^([a-z1-9]\.?)+@[a-z1-9]+(\.?[a-z])+\.([a-z]{2,})$/i
+      }
     }
   },
   props: {
     value: Boolean
   },
   components: {
-    inputPhone,
+    inputMask,
     inputText
   },
   methods: {
+    checkForm(v) {
+      this.valid && this.$emit('complete', this.person)
+      event.preventDefault()
+    },
     test(v) {
       console.log('v :', v)
       console.log('event :', event)
@@ -102,6 +122,17 @@ export default {
     }
   },
   computed: {
+    valid() {
+      validate = validate.bind(this)
+      return validate('name') && validate('email') && this.phoneValid
+    },
+    nameSubtext() {
+      validate = validate.bind(this)
+      return {
+        text: 'Только кирилица',
+        style: !validate('name') && 'color: red;'
+      }
+    },
     v: {
       get() {
         return this.value
@@ -131,16 +162,15 @@ export default {
   background: rgba(0,0,0,.5)
   &.active
     z-index: 1
-    
 
     opacity: 1
     .modal
       transform: scale(1)
 
 .modal
-  width: 100%
+  width: 550px
   margin: 5px
-  padding: 10px
+  padding: 20px
 
   transition: .2s transform
   transform: scale(0)

@@ -15,9 +15,10 @@ header.header.color-white
           от надежных застройщиков без комиссии
       .contacts
         .wrapper.flex
-          .contacts-icon
-            img(src="/img/phone.svg", alt="")
-          .contacts-phone.fz53.bold.text-right 377-076
+          .contacts-phone.fz53.bold.text-right.align-center.flex
+            span.contacts-icon
+              img(src="~static/img/phone.svg", style='max-height: .8em' alt="")
+            | 	&nbsp;377-076
         .contacts-description.fz18 Отдел недвижимости ВГИФ
     .header-content.flex.space-between.align-center
       .flex.justify-between(
@@ -36,7 +37,7 @@ header.header.color-white
           button.header-btn.color-white(
             @click=`scroll("[data-target='shks']")`
           ) Посмотреть новостроки в продаже
-        .header-section.flex.justify-right.flex-column.align-end.justify-right
+        .header-section.flex.justify-right.flex-column.align-end.justify-right.hide-sm-1000
           .fz18.bold ЖК Династия - дом Лазарев
           .fz13 Кирпичный дом на ул.Диктора Левитана
           a.color-white.fz13(

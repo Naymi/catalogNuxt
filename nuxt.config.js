@@ -39,15 +39,21 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/proxy'
   ],
   /*
    ** Axios module configuration
    */
   axios: {
+    // proxy: true
     // See https://github.com/nuxt-community/axios-module#options
   },
-
+  proxy: {
+    '/api': {
+      target: 'http://novostroykivladimira.ru'
+    }
+  },
   /*
    ** Build configuration
    */

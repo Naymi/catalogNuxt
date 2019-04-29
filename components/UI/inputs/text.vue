@@ -4,12 +4,13 @@
 )
   label.main(:class='error ? "error" : ""')
     input.input(
-      :value='v'
+      v-model='v'
       :style='hide_border !== undefined ? "border: none" : ""'
       required
       :name='name'
       :class='dark ? "dark" : ""'
     )
+    .input-info(v-if='subtext' :style='subtext.style') {{subtext.text}}
     .label {{ label }}
     .postfix(
       :style='color ? `color: ${color}` : ""'
@@ -26,7 +27,9 @@ export default {
     'hide_border',
     'name',
     'color',
-    'dark'
+    'dark',
+    'subtext',
+    'dontEmit'
   ],
   mounted() {
     this.el = this.$el
@@ -38,8 +41,13 @@ export default {
     }
   },
   computed: {
-    v() {
-      return this.value
+    v: {
+      get() {
+        return this.value
+      },
+      set(v) {
+        !this.dontEmit && this.$emit('input', v)
+      }
     }
   }
 }
@@ -103,7 +111,8 @@ $color: white
       opacity: 1
 
       font-size: .5em
-
+    &-info
+      font-size: .5em
 .main.error
   position: relative
 
