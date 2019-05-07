@@ -1,7 +1,7 @@
 <template lang="pug">
 section.shks.container-940.box-center
   .shks-head
-    .shks-sort.flex.justify-right
+    .shks-sort.flex.justify-right.align-center
       .shks-sort__label Сортировать по
       .shks-sort__item(
         @click='sort("cost")',
@@ -28,6 +28,8 @@ section.shks.container-940.box-center
       style='margin-top: 20px; max-width: 300px'
     )
       .shk(v-if='shk.name!=="card"' @click='$emit("picknovostroyka", shk)')
+        .shk__sale(v-if='index===0')
+          img(src='~/static/img/sale.png' alt='')
         .shk-img
           img(src="/img/shks/1.jpg", alt="")
         .shk-content
@@ -68,8 +70,9 @@ section.shks.container-940.box-center
   display: inline-block
   visibility: hidden
 
-  width: 10px
-  height: 50%
+  width: .5em
+  min-height: .5em
+  margin-left: 5px
 
   transition: .2s all
 
