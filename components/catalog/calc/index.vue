@@ -116,8 +116,9 @@
 
     font-size: 16px
   &__main
-    font-family: 'Montserrat-SemiBold'
     font-size: 40px
+    font-weight: 700
+
 </style>
 
 <style lang="sass">

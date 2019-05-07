@@ -13,13 +13,11 @@ header.header.color-white
           Подбор квартир<br>
           в новостройках Владимира<br>
           от надежных застройщиков без комиссии
-      .contacts
-        .wrapper.flex
-          .contacts-phone.fz53.bold.text-right.align-center.flex
-            span.contacts-icon
-              img(src="~static/img/phone.svg", style='max-height: .8em' alt="")
-            | 	&nbsp;377-076
-        .contacts-description.fz18 Отдел недвижимости ВГИФ
+      .phone
+        .phone__head
+          img(src="~/static/img/phone.svg", alt="alt").phone__img
+          .phone__number 377-076
+        .phone__description Отдел недвижимости ВГИФ
     .header-content.flex.space-between.align-center
       .flex.justify-between(
         style={
@@ -36,7 +34,7 @@ header.header.color-white
             от отдела недвижимости Владимирского ипотечного фонда
           button.header-btn.color-white(
             @click=`scroll("[data-target='shks']")`
-          ) Посмотреть новостроки в продаже
+          ) Посмотреть новостроки в&nbsp;продаже
         .header-section.flex.justify-right.flex-column.align-end.justify-right.hide-sm-1000
           .fz18.bold ЖК Династия - дом Лазарев
           .fz13 Кирпичный дом на ул.Диктора Левитана
@@ -50,7 +48,7 @@ header.header.color-white
               borderRadius: '10px',
               backgroundColor: '#ac1c1d'
             }
-          ) Акции и спецпередложения в апреле
+          ) Акции и спецпередложения в мае
 </template>
 
 <script>

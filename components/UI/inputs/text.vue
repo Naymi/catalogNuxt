@@ -101,7 +101,7 @@ $color: white
 
     font: inherit
     &.dark
-      border-bottom: 1px solid black
+      border-bottom: 1px solid gray
 
     &:focus ~ .label, &:valid ~ .label
       top: 0
@@ -138,7 +138,7 @@ $color: white
 
       cursor: default
 
-      opacity: 1
+      // opacity: 1
 
       font-size: .5em
   .input

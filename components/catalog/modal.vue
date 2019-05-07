@@ -15,7 +15,6 @@
         name='name'
         dark='dark'
         v-model='person.name'
-        :subtext=`nameSubtext`
       )
       input-mask(
         :getInput='getPhoneInput'
@@ -52,19 +51,6 @@
 </style>
 
 
-<style lang="sass" scoped>
-.modal-btn
-  margin: 20px auto
-.btn
-  display: block
-
-  padding: 15px 60px
-
-  border-radius: 10px
-  background-color: #1867c0
-  box-shadow: 0 3px 8px 1px rgba(46, 41, 42, 0.31)
-
-</style>
 
 
 <style lang="sass" scoped>
@@ -73,6 +59,20 @@
     margin: 10px 0
 </style>
 
+<style lang="sass" scoped>
+.btn
+  display: block
+
+  padding: 15px 60px
+
+  border-radius: 10px
+  background-color: #1867c0
+  box-shadow: 0 3px 8px 1px rgba(46, 41, 42, 0.31)
+.modal-btn
+  display: block
+  margin: 20px auto
+
+</style>
 
 <script>
 import inputText from '~/components/UI/inputs/text'

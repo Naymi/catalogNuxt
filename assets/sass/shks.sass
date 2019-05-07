@@ -1,5 +1,6 @@
 .shks
   margin-top: 3em
+  margin-bottom: 80px
   &-sort
     flex-wrap: wrap
     @media screen and (max-width: 600px)
@@ -12,6 +13,9 @@
       margin: .5em
       padding: .5em
     &__item
+      display: flex
+      align-items: center
+
       cursor: pointer
       user-select: none
   &-content
@@ -23,8 +27,6 @@
 .shk
   position: relative
 
-  overflow: hidden
-
   max-width: 300px
   height: 450px
 
@@ -33,7 +35,10 @@
   border-radius: 10px
   background-color: #ffffff
   box-shadow: 0 2px 11px 1px rgba(133, 156, 179, 0.13)
-
+  &__sale
+    position: absolute
+    top: 10px
+    left: -16px
   &-price
     position: absolute
     top: 100%

@@ -29,6 +29,7 @@
     @pickbank='pickbank'
   )
   modal(v-model='modal' @complete='completeModal')
+  myfooter
 </template>
 
 <script>
@@ -41,10 +42,12 @@ import bankList from '~/components/banklist'
 import getBanks from '~/assets/api'
 import modal from '~/components/catalog/modal'
 import startValue from '~/assets/startValue'
+import myfooter from '~/components/footer';
 export default {
   components: {
     unready,
     shks,
+    myfooter,
     bankList,
     catalogHeader,
     catalogCalc,
@@ -71,10 +74,14 @@ export default {
   },
   methods: {
     send() {
-      this.$axios.$post('/api/', this.parcel).then(data => console.log(data))
+      this.$axios
+        .$post('/api/v2.php', this.parcel)
+        .then(data => console.log(data))
     },
     completeModal(v) {
-      this.parcel.data = { ...this.parcel.data, ...v }
+      this.parcel.data = v
+      console.log('this.parcel :', this.parcel)
+      // return
       this.send()
     },
     getBanks,
@@ -82,16 +89,22 @@ export default {
       console.log('v :', v)
     },
     pickbank(v) {
-      this.parcel.from = {
-        target: 'Карточка банка',
-        data: v
+      this.parcel = {
+        from: {
+          target: 'Карточка банка',
+          data: v
+        },
+        banks: this.banks,
+        creditParams: this.data
       }
       this.modal = true
     },
     picknovostroyka(v) {
-      this.parcel.from = {
-        target: 'Карточка ЖК',
-        data: v
+      this.parcel = {
+        from: {
+          target: 'Карточка ЖК',
+          data: v
+        }
       }
       this.modal = true
     }
@@ -107,7 +120,6 @@ export default {
     return {
       parcel: {
         from: null,
-        to: null,
         data: null
       },
       shksdata,
