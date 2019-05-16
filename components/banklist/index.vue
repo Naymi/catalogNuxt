@@ -74,8 +74,10 @@ export default {
     font-weight: 400
     line-height: 25px
     @media screen and (max-width: 758px)
+
       margin-top: 5px
       margin-bottom: 20px
+      margin-top: 10px
 
       font-size: 10px
       line-height: 1.5
@@ -85,11 +87,9 @@ export default {
   padding: 0 20px
 .banks
   display: grid
-  justify-content: space-between
+  justify-content: center
 
   grid-template-columns: repeat(auto-fit,300px)
-  grid-row-gap: 20px
-  @media screen and (max-width: 1200px)
-    justify-content: space-around
+  grid-gap: calc(100px / 3)
 
 </style>
