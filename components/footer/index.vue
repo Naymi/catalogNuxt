@@ -133,6 +133,8 @@ footer.footer.color-white
   &__number
     font-size: 53px
     font-weight: 700
+    @media screen and (max-width: 500px)
+      font-size: 30px
   &__description
     letter-spacing: -0.27px
 
