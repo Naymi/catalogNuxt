@@ -14,7 +14,7 @@ footer.footer.color-white
         .contacts__phone.phone.contacts__item
           .phone__head
             img(src="~/static/img/phone.svg", alt="alt").phone__img
-            .phone__number 377-076
+            a(href="tel:377076").phone__number 377-076
           .phone__description Отдел недвижимости ВГИФ
   hr.footer__divider
   .footer__container
