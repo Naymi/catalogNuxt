@@ -30,7 +30,7 @@
       div.options__param По форме банка
       div.options__value {{Форма.rate}}
       div.text-right {{Форма.firstInstallmentPercentage}}
-      div(style='letter-spacing: -0.56px').options__param ИП (предприниматель)
+      div(style='letter-spacing: -0.56px').options__param Предприниматель
       div.options__value {{ИП.rate}}
       div.text-right {{ИП.firstInstallmentPercentage}}
 </template>

@@ -42,7 +42,7 @@ import bankList from '~/components/banklist'
 import getBanks from '~/assets/api'
 import modal from '~/components/catalog/modal'
 import startValue from '~/assets/startValue'
-import myfooter from '~/components/footer';
+import myfooter from '~/components/footer'
 export default {
   components: {
     unready,
@@ -115,8 +115,8 @@ export default {
     }
   },
   data() {
-    const firstInstallment = startValue.firstInstallment,
-      price = startValue.price
+    const firstInstallment = startValue.firstInstallment
+    const price = startValue.price
     return {
       parcel: {
         from: null,

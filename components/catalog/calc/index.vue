@@ -324,11 +324,13 @@ export default {
 
 <style scoped>
 .main-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+  grid-column-gap: 80px;
+  justify-content: center;
   padding: 2em;
-
+  padding-top: 57px;
+  padding-bottom: 40px;
   border-radius: 10px;
   background: #1867c0;
 }
