@@ -87,7 +87,7 @@ export default {
   display: grid
   justify-content: space-between
 
-  grid-template-columns: repeat(auto-fit,325px)
+  grid-template-columns: repeat(auto-fit,300px)
   grid-row-gap: 20px
   @media screen and (max-width: 1200px)
     justify-content: space-around

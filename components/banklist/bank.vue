@@ -3,11 +3,7 @@
   .back(@click='pickbank(bank)').color-white
     .back-head.bold Оставить заявку на ипотеку
     .back-subtext Заполните форму и мы подберем <br> оптимальный ипотечный кредит <br> по  указанным параметрам
-    button.fz17.back-btn.color-white(
-      style={
-        marginTop:'2em'
-      }
-    ) Отправить заявку
+    button.fz17.back-btn.color-white Отправить заявку
   .core
     .logo
       img(:src='bank.icon' height='35px' :alt='bank.name').logo__img
@@ -28,14 +24,14 @@
       div.col.semibold Другие варианты:
       div.col.semibold Ставка
       div.text-right.col.semibold Взнос
-      div 2 документа
-      div(style='') {{Доки.rate}}
+      div.options__param 2 документа
+      div.options__value {{Доки.rate}}
       div.text-right {{Доки.firstInstallmentPercentage}}
-      div По форме банка
-      div(style='') {{Форма.rate}}
+      div.options__param По форме банка
+      div.options__value {{Форма.rate}}
       div.text-right {{Форма.firstInstallmentPercentage}}
-      div(style='letter-spacing: -0.56px') ИП (предприниматель)
-      div(style='') {{ИП.rate}}
+      div(style='letter-spacing: -0.56px').options__param ИП (предприниматель)
+      div.options__value {{ИП.rate}}
       div.text-right {{ИП.firstInstallmentPercentage}}
 </template>
 
@@ -103,7 +99,7 @@ export default {
   padding-top: 32px
 
   cursor: pointer
-
+  max-width: 300px
   border: 1px solid #e0dcdc
   border-radius: 10px
   
@@ -129,11 +125,13 @@ export default {
     z-index: 1
     top: 0
     left: 0
-
+    box-sizing: border-box
+    padding: 20px
+    display: flex
+    flex-direction: column
+    justify-content: center
     width: 100%
     height: 100%
-    padding-top: 50px
-    padding-left: 28px
 
     cursor: pointer
     transition: .2s all
@@ -146,7 +144,7 @@ export default {
     &-head
       letter-spacing: -0.82px
 
-      font-size: 31px
+      font-size: 30px
       font-weight: 700
       line-height: 36.52px
     &-subtext
@@ -158,9 +156,10 @@ export default {
       font-weight: 400
       line-height: 20px
     &-btn
-      width: 273px
+      width: 100%
       height: 45px
-
+      margin-top: 20px
+      box-sizing: border-box
       border-radius: 10px
       background-color: #0894ed
       box-shadow: 0 3px 8px 1px rgba(46, 41, 42, 0.31)
@@ -185,12 +184,12 @@ export default {
       display: flex
       align-items: center
 
-      line-height: 12.5px
+      line-height: 1
     .stavka
       display: flex
       align-items: center
 
-      line-height: 12.5px
+      line-height: 1
   .options
     display: grid
 
@@ -199,11 +198,14 @@ export default {
     font-size: 14px
 
     grid-template-columns: 3fr 1fr 1fr
+
     grid-row-gap: 2px
+
     .col
       letter-spacing: -0.56px
 
       font-size: 14px
       font-weight: 500
       line-height: 16.67px
+
 </style>
