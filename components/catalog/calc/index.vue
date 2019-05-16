@@ -85,7 +85,7 @@
     .data-output
       .data-output__head {{firstInstallmentLabel}}
       .data-output__main {{(+firstInstallment).toLocaleString('ru')}} руб.
-    button.btn-blue.color-white.text-center(
+    button.calc__btn.btn-blue.color-white.text-center(
       @click=`scroll("[data-target='banks']")`
     ) Посмотреть предложения
     .privacy(
@@ -97,6 +97,16 @@
       Окончательные условия кредитования определяются после телефонной 
       консультации с кредитным менеджером.
 </template>
+
+<style lang="sass">
+.calc__btn
+  padding-left: 10px  !important
+  padding-right: 10px !important
+  box-sizing: border-box
+  min-width: 200px
+  width: 100%
+</style>
+
 
 <style lang="sass" scoped>
 .btn-blue
@@ -118,7 +128,8 @@
   &__main
     font-size: 40px
     font-weight: 700
-
+    @media screen and (max-width: 600px)
+      font-size: 30px
 </style>
 
 <style lang="sass">
@@ -316,12 +327,27 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
   padding: 2em;
 
   border-radius: 10px;
   background: #1867c0;
 }
+
+@media screen and (max-width: 900px) {
+  .main-container {
+    width: 600px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-container {
+    width: 300px;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+}
+
 .main-container .section {
   width: 100%;
   max-width: 380px;
