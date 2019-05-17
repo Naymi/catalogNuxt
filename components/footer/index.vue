@@ -7,10 +7,14 @@ footer.footer.color-white
           .logo-name__name НовостройкиВладимира
           .logo-name__slogan Подбор квартир в новостройках Владимира от надежных застройщиков без комиссии 
         .contacts__social.social.contacts__item
-          img(src='~/assets/img/social/vk.png').social__item
-          img(src='~/assets/img/social/facebook.png').social__item
-          img(src='~/assets/img/social/instagram.png').social__item
-          img(src='~/assets/img/social/youtube.png').social__item
+          a(href="https://vk.com/ipoteka33")
+            img(src='~/assets/img/social-icons/vk.svg').social__item
+          a(href="https://facebook.com/ipoteka33")
+            img(src='~/assets/img/social-icons/facebook.svg').social__item
+          a(href="https://www.instagram.com/ipoteka_vladimir/")
+            img(src='~/assets/img/social-icons/insta.svg').social__item
+          a(href="https://ok.ru/profile/563716191982")
+            img(src='~/assets/img/social-icons/ok_ru.svg').social__item
         .contacts__phone.phone.contacts__item
           .phone__head
             img(src="~/static/img/phone.svg", alt="alt").phone__img
@@ -43,9 +47,6 @@ footer.footer.color-white
         a(href="#").novostroyki__item Дом на 1-ом Толмачевском проезде
         a(href="#").novostroyki__item Жилой дом на ул. Ломоносова
         a(href="#").novostroyki__item Жилой дом на ул. Учительская
-      
-
-
 </template>
 
 <style lang="sass">
@@ -53,7 +54,7 @@ footer.footer.color-white
   display: flex
   &__item
     display: block
-
+    height: 40px
     margin: 0 1ch
 </style>
 
@@ -63,6 +64,15 @@ footer.footer.color-white
   display: flex
   flex-wrap: wrap
   justify-content: space-between
+
+  &__section
+    margin: 20px 0
+
+    &:last-child
+      margin-bottom: 0
+
+    &:last-child
+      margin-top: 0
   &__item
     display: block
 
