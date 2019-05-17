@@ -42,7 +42,7 @@ html
 .bold
   font-weight: 700
 .semibold
-  font-family: 600
+  font-weight: 600
 .color
   &-white
     color: white
@@ -61,4 +61,10 @@ html
   cursor: pointer
 .hide-sm-1000
   @media screen and (max-width: 1000px)
+    display: none
+.hide-sm-500
+  @media screen and (max-width: 500px)
+    display: none
+.hide-sm-600
+  @media screen and (max-width: 600px)
     display: none

@@ -12,7 +12,7 @@
     style={
       marginTop: '2em'
     }
-  ) Калькулятор ипотеки на новостройку
+  ) Калькулятор ипотеки на&nbsp;новостройку
   .text-center(
     style={
       marginTop: '1em',

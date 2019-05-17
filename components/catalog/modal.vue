@@ -4,7 +4,7 @@
   @click='closeModal'
 )
   .modal
-    .modal-head.text-center.fz20 Почти готово!
+    .modal-head.text-center.fz20 Заявка на консультацию
     .modal-sub-head.text-center.fz16 Оставьте свои контактные данные**
     form(
       @submit="checkForm"
