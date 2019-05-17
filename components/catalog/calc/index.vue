@@ -168,12 +168,13 @@ let masks = [
     },
     call(masks, mask) {
       const firstmask = masks.find(el => el.name === 'firstInstallment').mask
-
-      mask.typedValue >= mask.masked.min &&
+      if (mask.typedValue >= mask.masked.min) {
         firstmask.updateOptions({
           min: ~~(mask.typedValue * (this.value.motherCapital ? 0.1 : 0.15)),
           max: mask.typedValue - 500000
         })
+        console.log('firstmask.masked.min :', firstmask.masked.min)
+      }
     }
   },
   {
@@ -227,6 +228,10 @@ export default {
       },
       set(v) {
         const koef = this.firstInstallmentKoef
+        let firstmask = this.Masks.find(i => i.name === 'firstInstallment').mask
+        console.log('firstmask :', firstmask)
+        firstmask.masked.min = ~~(v * koef)
+        firstmask.masked.max = v - 500000
         const firstInstallment =
           this.firstInstallment > v * koef
             ? this.firstInstallment < v - 500e3
@@ -277,7 +282,7 @@ export default {
     }
   },
   mounted() {
-    masks = masks.map(i => {
+    this.Masks = masks.map(i => {
       return {
         ...i,
         ...{
@@ -295,6 +300,7 @@ export default {
               const tmp = {}
               tmp[i.name] = mask.typedValue
               i.call && i.call.call(this, masks, mask)
+              console.log('mask.masked.min :', mask.masked.min)
               mask.typedValue >= mask.masked.min &&
                 this.$emit('input', { ...this.value, ...tmp })
               console.log('this.value after accept :', this.value)
