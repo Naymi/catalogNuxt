@@ -8,11 +8,13 @@ header.header.color-white
     .header-head.flex.box-center.align-center.justify-between
       .header-logo.flex.align-center
         .header-logo__img
-          img(src='/img/logo-vgif.png')
-        .header-logo__description.
-          Подбор квартир<br>
-          в новостройках Владимира<br>
-          от надежных застройщиков без комиссии
+          img(style='max-height: 5em' src='/img/logo-vgif.jpg')
+        .header-logo__description
+          | Подбор квартир
+          br.hide-sm-1000
+          | в новостройках Владимира
+          br.hide-sm-1000
+          | от надежных застройщиков без комиссии
       .phone
         .phone__head
           img(src="~/static/img/phone.svg", alt="phone").phone__img
@@ -28,10 +30,12 @@ header.header.color-white
           .description-head.fz30.bold.
             Новостройки Владимира <br>
             от проверенных застройщиков
-          .description-content.fz18.
-            Подбор квартир в новостройках Владимира <br>
-            от надежных застройщиков без комиссии <br>
-            от отдела недвижимости Владимирского ипотечного фонда
+          .description-content.fz18
+            | Подбор квартир в&nbsp;новостройках Владимира
+            br.hide-sm-1000
+            | от&nbsp;надежных застройщиков без комиссии
+            br.hide-sm-1000
+            |  от&nbsp;отдела недвижимости Владимирского ипотечного фонда
           button.header-btn.color-white(
             @click=`scroll("[data-target='shks']")`
           ) Посмотреть новостроки в&nbsp;продаже
@@ -42,7 +46,9 @@ header.header.color-white
             href='//жк-династия33.рф/promo.html'
             target='blank'
             style={
+              width: '100%',
               padding: '5px 10px',
+              textAlign: 'center',
               background: 'red',
               boxShadow: '0 3px 8px 1px rgba(46, 41, 42, 0.31)',
               borderRadius: '10px',

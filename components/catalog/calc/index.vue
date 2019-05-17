@@ -59,13 +59,13 @@
       style={
         marginTop: '10px'
       }
-    )
+    ).hide-sm-600
       .icon-info(style={
         marginRight: '10px',
         fontSize: '10px',
         marginTop: '6px'
       }) i
-      div 
+      div
         .output-data-head.fz13.flex.align-center(
           style='line-height: 29.17px;'
         ) Указанные параметры:

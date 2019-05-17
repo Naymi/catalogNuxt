@@ -1,7 +1,7 @@
 <template lang="pug">
 section.shks.container-940.box-center
   .shks-head
-    .shks-sort.flex.justify-right.align-center
+    .shks-sort.flex.justify-right.align-center.hide-sm-1000
       .shks-sort__label Сортировать по
       .shks-sort__item(
         @click='sort("cost")',
@@ -33,7 +33,7 @@ section.shks.container-940.box-center
         .shk-img
           img(src="/img/shks/1.jpg", alt="")
         .shk-content
-          .shk-ready.fz13(data-key='ready') {{ shk.sell === true ? 'Дом сдан' : getQ(shk.sell) + ' квартал ' + new Date(shk.sell).getFullYear() +' года'}}
+          .shk-ready.fz13(data-key='ready') {{ shk.sell === true ? 'Дом сдан' : 'Сдача: ' + getQ(shk.sell) + ' квартал ' + new Date(shk.sell).getFullYear() +' года'}}
           .shk-title.bold.fz15 {{ shk.name }}
           .shk-address.fz13(v-html='shk.address')
           .shk-cost
