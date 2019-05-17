@@ -5,6 +5,9 @@ export default {
    ** Headers of the page
    */
   head: {
+    htmlAttrs: {
+      lang: 'ru'
+    },
     title: 'Тайтл',
     meta: [
       { charset: 'utf-8' },
