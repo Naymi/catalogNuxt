@@ -67,12 +67,12 @@ footer.footer.color-white
 
   &__section
     margin: 20px 0
+    @media screen and (max-width: 600px)
+      &:last-child
+        margin-bottom: 0
 
-    &:last-child
-      margin-bottom: 0
-
-    &:first-child
-      margin-top: 0
+      &:first-child
+        margin-top: 0
   &__item
     display: block
 
