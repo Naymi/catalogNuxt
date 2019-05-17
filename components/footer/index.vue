@@ -71,7 +71,7 @@ footer.footer.color-white
     &:last-child
       margin-bottom: 0
 
-    &:last-child
+    &:first-child
       margin-top: 0
   &__item
     display: block
@@ -112,13 +112,12 @@ footer.footer.color-white
   &__divider
     width: 100%
     height: 2px
-    margin-top: 24px
+    margin: 25px 0
 
     opacity: .09
     background: #fff
   &__content
-    padding-top: 80px
-    padding-bottom: 100px
+    padding-bottom: 15vh
 
 </style>
 
