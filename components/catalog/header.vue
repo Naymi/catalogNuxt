@@ -18,7 +18,7 @@ header.header.color-white
       .phone
         .phone__head
           img(src="~/static/img/phone.svg", alt="phone").phone__img
-          a(href='377076').phone__number 377-076
+          a(href='tel: 377076').phone__number 377-076
         .phone__description Отдел недвижимости ВГИФ
     .header-content.flex.space-between.align-center
       .flex.justify-between(
