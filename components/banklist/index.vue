@@ -1,7 +1,7 @@
 <template lang="pug">
 .banklist
   .mytop
-    h2.h2 Предложения банков {{tmp}}
+    h2.h2 Предложения банков
     small.
       По указанным параметрам в калькуляторе были подобраны представленные ниже банки. <br>
       Выберите один или несколько банков и заполните заявку на ипотеку
@@ -21,14 +21,13 @@ export default {
   },
   watch: {
     modal(val) {
-      val ? '' : (this.bank = null)
+      val && (this.bank = null)
     }
   },
   data() {
     return {
       modal: false,
       bank: false,
-      tmp: null
     }
   },
   components: {
@@ -74,8 +73,6 @@ export default {
     font-weight: 400
     line-height: 25px
     @media screen and (max-width: 758px)
-
-      margin-top: 5px
       margin-bottom: 20px
       margin-top: 10px
 
