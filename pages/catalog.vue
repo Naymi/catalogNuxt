@@ -122,7 +122,10 @@ export default {
         from: null,
         data: null
       },
-      shksdata,
+      shksdata: [...shksdata].sort(
+        (a, b) =>
+          (b.images ? b.images.length : 0) - (a.images ? a.images.length : 0)
+      ),
       modal: false,
       data: {
         type: 'Новостройка',
