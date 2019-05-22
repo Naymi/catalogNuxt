@@ -31,7 +31,8 @@ section.shks.container-940.box-center
         .shk__sale(v-if='index===0')
           img(src='~/static/img/sale.png' alt='')
         .shk-img
-          img(src="/img/shks/1.jpg", alt="")
+          gallery(v-if='shk.images' :data=`shk.images`)
+          img(v-else src="~/static/img/shks/undef.png", alt="alt")
         .shk-content
           .shk-ready.fz13(data-key='ready') {{ shk.sell === true ? 'Дом сдан' : 'Сдача: ' + getQ(shk.sell) + ' квартал ' + new Date(shk.sell).getFullYear() +' года'}}
           .shk-title.bold.fz15 {{ shk.name }}
@@ -88,7 +89,11 @@ section.shks.container-940.box-center
 <script>
 import romanNumber from '~/assets/romanNumber'
 import scroll from '~/assets/scroll'
+import gallery from '~/components/UI/hover-gallery'
 export default {
+  components: {
+    gallery
+  },
   props: {
     data: Array
   },

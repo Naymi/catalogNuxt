@@ -1,4 +1,3 @@
-console.log('process :', process.env.NODE_ENV === 'production')
 export default {
   mode: 'spa',
 
