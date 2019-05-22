@@ -5,7 +5,7 @@
 )
   .modal
     .modal-head.text-center.fz20 Заявка на консультацию
-    .modal-sub-head.text-center.fz16 Оставьте свои контактные данные**
+    .modal-sub-head.text-center.fz16 Оставьте свои контактные данные*
     form(
       @submit="checkForm"
     ).inputs
@@ -42,7 +42,7 @@
       )
       button.modal-btn.btn.text-uppercase.color-white.box-center Отправить
     .privacy.
-      **Нажимая кнопку «Отправить заявку на ипотеку», вы соглашаетесь с условиями обработки персональных данных
+      *Нажимая кнопку «Отправить», вы соглашаетесь с условиями обработки персональных данных
 </template>
 
 <style lang="sass">

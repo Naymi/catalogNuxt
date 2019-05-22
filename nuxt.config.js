@@ -1,3 +1,4 @@
+console.log('process :', process.env.NODE_ENV === 'production')
 export default {
   mode: 'spa',
 
@@ -49,12 +50,16 @@ export default {
    ** Axios module configuration
    */
   axios: {
+    baseURL:
+      process.env.NODE_ENV === 'production'
+        ? 'http://catalog.novostroykivladimira.ru'
+        : undefined
     // proxy: true
     // See https://github.com/nuxt-community/axios-module#options
   },
   proxy: {
     '/api': {
-      target: 'http://novostroykivladimira.ru',
+      target: 'http://catalog.novostroykivladimira.ru'
     }
   },
   /*
