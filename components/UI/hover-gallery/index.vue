@@ -3,7 +3,7 @@
   v-if='data'
   :style='`background: url(${currentBackground}) center no-repeat; background-size: contain;`'
 )
-  span.hover-gallery__item(
+  .hover-gallery__item(
     v-for='i in data'
     :key='i'
     @mouseover='hover(i)'

@@ -3,7 +3,7 @@
   .section
     .target(
       style={
-        marginBottom: '20px'
+        "margin-bottom": '20px'
       }
     ) Цель кредита: Новостройка
     .data-container
@@ -51,19 +51,19 @@
           v-model='motherCapital'
         )
         span(style={
-          marginLeft: '10px',
-          userSelect: 'none',
+          "margin-left": '10px',
+          "user-select": 'none',
           cursor: 'pointer'
         }) У меня есть материнский капитал
     .output-data.flex(
       style={
-        marginTop: '10px'
+        "margin-top": '10px'
       }
     ).hide-sm-600
       .icon-info(style={
-        marginRight: '10px',
-        fontSize: '10px',
-        marginTop: '6px'
+        "margin-right": '10px',
+        "font-size": '10px',
+        "margin-top": '6px'
       }) i
       div
         .output-data-head.fz13.flex.align-center(
@@ -100,11 +100,12 @@
 
 <style lang="sass">
 .calc__btn
-  padding-left: 10px  !important
-  padding-right: 10px !important
   box-sizing: border-box
-  min-width: 200px
   width: 100%
+  min-width: 200px
+  padding-right: 10px !important
+  padding-left: 10px  !important
+
 </style>
 
 
@@ -229,7 +230,6 @@ export default {
       set(v) {
         const koef = this.firstInstallmentKoef
         let firstmask = this.Masks.find(i => i.name === 'firstInstallment').mask
-        console.log('firstmask :', firstmask)
         firstmask.masked.min = ~~(v * koef)
         firstmask.masked.max = v - 500000
         const firstInstallment =
@@ -287,6 +287,19 @@ export default {
         ...i,
         ...{
           mask: (() => {
+            console.log('this.mainSelector :', this.mainSelector)
+            console.log('i.name :', i.name)
+            console.log(
+              document.querySelector(`[data-id="${this.mainSelector}"]`)
+            )
+            console.log(this.$el)
+
+            console.log(
+              'mount : ',
+              document.querySelector(
+                `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
+              )
+            )
             const startValue = document.querySelector(
               `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
             ).value
@@ -300,10 +313,8 @@ export default {
               const tmp = {}
               tmp[i.name] = mask.typedValue
               i.call && i.call.call(this, masks, mask)
-              console.log('mask.masked.min :', mask.masked.min)
               mask.typedValue >= mask.masked.min &&
                 this.$emit('input', { ...this.value, ...tmp })
-              console.log('this.value after accept :', this.value)
             })
             return mask
           })()
@@ -322,7 +333,7 @@ export default {
   data() {
     return {
       Masks: null,
-      mainSelector: Math.random()
+      mainSelector: 'Suka'
     }
   }
 }
@@ -331,28 +342,33 @@ export default {
 <style scoped>
 .main-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
-  grid-column-gap: 80px;
   justify-content: center;
+
   padding: 2em;
   padding-top: 57px;
   padding-bottom: 40px;
+
   border-radius: 10px;
   background: #1867c0;
+
+  grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+  grid-column-gap: 80px;
 }
 
 @media screen and (max-width: 900px) {
   .main-container {
-    width: 600px;
     justify-content: center;
+
+    width: 600px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .main-container {
-    width: 300px;
-    box-sizing: border-box;
     justify-content: center;
+
+    box-sizing: border-box;
+    width: 300px;
   }
 }
 
