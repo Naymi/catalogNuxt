@@ -10,13 +10,13 @@
   .bold.text-center.fz32(
     data-target='calc'
     style={
-      marginTop: '2em'
+      "margin-top": '2em'
     }
   ) Калькулятор ипотеки на&nbsp;новостройку
   .text-center(
     style={
-      marginTop: '1em',
-      marginBottom: '1em',
+      "margin-top": '1em',
+      "margin-bottom": '1em',
     }
   ) Подайте онлайн заявку на одобрение ипотеки сразу в 10 банков за 1 минуту. Бесплатно.
   catalog-calc(

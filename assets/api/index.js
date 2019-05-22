@@ -1,6 +1,5 @@
 import ipotekaBanks from './ipoteka'
 import Bank from './models/bank'
-global.console.log('ipotekaBanks :', ipotekaBanks)
 function getBanks(mdata) {
   const data = {
     ...mdata,

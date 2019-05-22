@@ -115,7 +115,6 @@ export default {
       })
       // 9 должен быть картонкой с калькулятором
       result.splice(8, 0, { name: 'card' })
-      console.log('result :', result)
       return result
     }
   },

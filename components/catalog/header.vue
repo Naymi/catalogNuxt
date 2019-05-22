@@ -48,11 +48,11 @@ header.header.color-white
             style={
               width: '100%',
               padding: '5px 10px',
-              textAlign: 'center',
+              "text-align": 'center',
               background: 'red',
-              boxShadow: '0 3px 8px 1px rgba(46, 41, 42, 0.31)',
-              borderRadius: '10px',
-              backgroundColor: '#ac1c1d'
+              "box-shadow": '0 3px 8px 1px rgba(46, 41, 42, 0.31)',
+              "border-radius": '10px',
+              "background-color": '#ac1c1d'
             }
           ) Акции и спецпередложения в мае
 </template>
