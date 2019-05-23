@@ -77,7 +77,12 @@
     "name": "Жилой комплекс «Содышка»",
     "address": "Октябрьский район<br> Горького ул., д.133",
     "cost": 1522920,
-    "price": 34000
+    "price": 34000,
+    "images": [
+      "/img/shks/sodishka/1.png",
+      "/img/shks/sodishka/2.png",
+      "/img/shks/sodishka/3.png"
+    ]
   },
   {
     "sell": true,
@@ -125,7 +130,8 @@
     "name": "Жилой комплекс «Молодёжный»",
     "address": "Октябрьский район<br> Северная ул., д.2 - А",
     "cost": 849160,
-    "price": 34000
+    "price": 34000,
+    "images": ["/img/shks/molodesh/1.png"]
   },
   {
     "sell": "10.01.19",
