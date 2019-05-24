@@ -34,7 +34,7 @@ section.shks.container-940.box-center
           gallery(v-if='shk.images' :data=`shk.images`)
           img(v-else src="~/static/img/shks/undef.png", alt="alt")
         .shk-content
-          .shk-ready.fz13(data-key='ready') {{ shk.sell === true ? 'Дом сдан' : 'Сдача: ' + getQ(shk.sell) + ' квартал ' + new Date(shk.sell).getFullYear() +' года'}}
+          .shk-ready.fz13(data-key='ready') {{ shk.sell === true ? 'Дом сдан' : 'Сдача: ' + getQ(shk.sell) + ' квартал ' + (new Date(...String(shk.sell).split('.').reverse())).getFullYear() +' года'}}
           .shk-title.bold.fz15 {{ shk.name }}
           .shk-address.fz13(v-html='shk.address')
           .shk-cost
@@ -101,8 +101,14 @@ export default {
     shks() {
       let result = [...this.data].sort((a, b) => {
         if (this.sorter.col === 'sell') {
-          a = a === true ? Infinity : new Date(a.sell)
-          b = b === true ? Infinity : new Date(b.sell)
+          let getDate = s =>
+            new Date(
+              ...String(s)
+                .split('.')
+                .reverse()
+            ).getFullYear()
+          a = a === true ? Infinity : getDate(a.sell)
+          b = b === true ? Infinity : getDate(b.sell)
         } else {
           a = a[this.sorter.col]
           b = b[this.sorter.col]
