@@ -101,14 +101,14 @@ export default {
     shks() {
       let result = [...this.data].sort((a, b) => {
         if (this.sorter.col === 'sell') {
-          let getDate = s =>
+          let getYear = s =>
             new Date(
               ...String(s)
                 .split('.')
                 .reverse()
             ).getFullYear()
-          a = a === true ? Infinity : getDate(a.sell)
-          b = b === true ? Infinity : getDate(b.sell)
+          a = a === true ? Infinity : getYear(a.sell)
+          b = b === true ? Infinity : getYear(b.sell)
         } else {
           a = a[this.sorter.col]
           b = b[this.sorter.col]
