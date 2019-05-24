@@ -108,7 +108,7 @@ export default {
   },
   proxy: {
     '/api': {
-      target: 'http://novostroykivladimira.ru'
+      target: 'https://novostroykivladimira.ru'
     }
   },
   /*
