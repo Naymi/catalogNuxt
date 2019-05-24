@@ -51,7 +51,7 @@ export default {
   axios: {
     baseURL:
       process.env.NODE_ENV === 'production'
-        ? 'http://catalog.novostroykivladimira.ru'
+        ? 'https://catalog.novostroykivladimira.ru'
         : undefined
     // proxy: true
     // See https://github.com/nuxt-community/axios-module#options

@@ -42,7 +42,7 @@
       )
       button.modal-btn.btn.text-uppercase.color-white.box-center Отправить
     .privacy.
-      *Нажимая кнопку «Отправить», вы соглашаетесь с условиями обработки персональных данных
+      *Нажимая кнопку «Отправить», вы соглашаетесь с #[a(href='/privat_policy.pdf' style='text-decoration: underline; color: #1867c0;' target='blank') условиями обработки персональных данных]
 </template>
 
 <style lang="sass">
@@ -79,7 +79,7 @@ import inputText from '~/components/UI/inputs/text'
 import IMask from 'imask'
 import inputMask from '~/components/UI/mask/'
 function validate(prop) {
-  return this.rules[prop].test(this.person[prop])
+  return this.rules[prop].test(this.person[prop].replace(/(^\s*)|(\s*)$/g, ''))
 }
 export default {
   data() {
