@@ -90,7 +90,8 @@ export default {
     send() {
       this.$axios
         .$post('/api/v2.php', this.parcel)
-        .then(data => console.log(data))
+        .then(data => this.$router.push('/spasibo'))
+        .catch((e)=> alert('Данные не были отправлены, попробуйте позже'))
     },
     completeModal(v) {
       this.parcel.data = v
