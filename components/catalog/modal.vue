@@ -92,7 +92,7 @@ export default {
       },
       rules: {
         name: /^[а-яё\ ]+$/i,
-        email: /^([a-z1-9]\.?)+@[a-z1-9]+(\.?[a-z])+\.([a-z]{2,})$/i
+        email: /^([a-z0-9]\.?)+@[a-z0-9]+(\.?[a-z])+\.([a-z]{2,})$/i
       }
     }
   },
@@ -105,6 +105,7 @@ export default {
   },
   methods: {
     checkForm(v) {
+      console.log('this.valid :', this.valid);
       this.valid && this.$emit('complete', this.person)
       event.preventDefault()
     },
