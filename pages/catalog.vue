@@ -44,6 +44,20 @@ import modal from '~/components/catalog/modal'
 import startValue from '~/assets/startValue'
 import myfooter from '~/components/footer'
 export default {
+  head() {
+    return {
+      title:
+        'Новостройки во Владимире, купить квартиру от застройщика | novostroykivladimira.ru',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Купить квартиру или студию в новостройке во Владимире. Цены на покупку жилья в новых и строящихся домах и ЖК от застройщиков и подрядчиков'
+        }
+      ]
+    }
+  },
   components: {
     unready,
     shks,
@@ -122,10 +136,7 @@ export default {
         from: null,
         data: null
       },
-      shksdata: [...shksdata].sort(
-        (a, b) =>
-          (b.images ? b.images.length : 0) - (a.images ? a.images.length : 0)
-      ),
+      shksdata,
       modal: false,
       data: {
         type: 'Новостройка',
