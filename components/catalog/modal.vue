@@ -171,7 +171,7 @@ export default {
   width: 550px
   margin: 5px
   padding: 20px
-
+  border-radius: 10px
   transition: .2s transform
   transform: scale(0)
 
