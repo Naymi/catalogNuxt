@@ -27,29 +27,7 @@ section.shks.container-940.box-center
       :key='String(shk.name)'
       style='margin-top: 20px; max-width: 300px'
     )
-      .shk(v-if='shk.name!=="card"' @click='$emit("picknovostroyka", shk)')
-        .shk__sale(v-if='index===0')
-          img(src='~/static/img/sale.png' alt='')
-        .shk-img
-          gallery(v-if='shk.images' :data=`shk.images`)
-          img(v-else src="~/static/img/shks/undef.png", alt="alt")
-        .shk-content
-          .shk-ready.fz13(data-key='ready') {{ shk.sell === true ? 'Дом сдан' : 'Сдача: ' + getQ(shk.sell) + ' квартал ' + (new Date(...String(shk.sell).split('.').reverse())).getFullYear() +' года'}}
-          .shk-title.bold.fz15 {{ shk.name }}
-          .shk-address.fz13(v-html='shk.address')
-          .shk-cost
-            span от 
-            div(
-              style={
-                display: 'inline-block',
-                position: 'relative'
-              }
-            )
-              b.fz30.bold(data-key='cost') {{ shk.cost.toLocaleString('ru') }}
-              .color-gray.shk-price(data-key='price') от {{ shk.price.toLocaleString('ru') }} руб./м#[sup 2]
-            span  руб.
-          div.text-right.shk-ref.fz13
-            a(href='#' target='blank') Узнать больше >>
+      shk(v-if='shk.name!=="card"' :shk='shk' @click='$emit("picknovostroyka", shk)' :index='index')
       .shk-back.color-white.back-blue(
         v-else
         @click=`scroll('[data-target="calc"]')`
@@ -87,12 +65,11 @@ section.shks.container-940.box-center
 </style>
 
 <script>
-import romanNumber from '~/assets/romanNumber'
 import scroll from '~/assets/scroll'
-import gallery from '~/components/UI/hover-gallery'
+import shk from './shk'
 export default {
   components: {
-    gallery
+    shk
   },
   props: {
     data: Array
@@ -125,12 +102,6 @@ export default {
     }
   },
   methods: {
-    getQ(v) {
-      v = new Date(v)
-      var m = ~~(v.getMonth() / 3)
-      // return (m > 4 ? m - 4 : m) + ' //// '
-      return this.romanNumber[m > 4 ? m - 4 : m]
-    },
     sort(v) {
       this.sorter.col == v
         ? (this.sorter.desc = !this.sorter.desc)
@@ -143,8 +114,7 @@ export default {
       sorter: {
         col: false,
         desc: false
-      },
-      romanNumber
+      }
     }
   }
 }

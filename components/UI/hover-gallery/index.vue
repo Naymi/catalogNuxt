@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     hover(v) {
-      console.log('v :', v)
       this.currentBackground = v
     }
   },
