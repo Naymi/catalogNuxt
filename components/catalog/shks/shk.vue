@@ -1,5 +1,5 @@
 <template lang="pug">
-  .shk(v-if='shk.name!=="card"' @click='$emit("click", shk)')
+  .shk(v-if='shk.name!=="card"' @click='$emit("picknovostroyka", shk)')
     .shk__sale(v-if='index===0')
       img(src='~/static/img/sale.png' alt='')
     .shk-img
