@@ -1,6 +1,5 @@
-export default function (test, data){
-  if (data.type === 'Новостройка')
-    return false
+export default function(test, data) {
+  if (data.type === "Новостройка") return false
   const rate = 10.99
   const firstInstallmentPercentage = 50
   const conditions = {
@@ -16,22 +15,22 @@ export default function (test, data){
       600000,
       /* до */
       50000000
-    ],
+    ]
   }
-  
-  if (test(conditions,data))
+
+  if (test(conditions, data))
     return {
       rate,
-      'Форма_банка': {
+      Форма_банка: {
         rate,
-        firstInstallmentPercentage,
+        firstInstallmentPercentage
       },
-      '2_документа': false,
+      "2_документа": false,
       ИП: {
         rate,
-        firstInstallmentPercentage,
-      },
+        firstInstallmentPercentage
+      }
     }
-  
+
   return false
 }

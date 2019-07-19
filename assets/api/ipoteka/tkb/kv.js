@@ -1,23 +1,22 @@
-export default function (test, data) {
-
+export default function(test, data) {
   let firstInstallmentPercentage
   let rate
-  if (data.firstInstallmentPercentage < 35) {
+  if (data.firstInstallmentPercentage <= 35) {
     rate = 10.95
-  } else if (data.firstInstallmentPercentage < 50) {
+  } else if (data.firstInstallmentPercentage <= 50) {
     rate = 10.45
   } else {
     rate = 10.2
   }
   if (data.region) {
-    if (data.creditAmount < 5000000) {
+    if (data.creditAmount <= 5000000) {
       firstInstallmentPercentage = 20
     } else {
       rate++
       firstInstallmentPercentage = 35
     }
   } else {
-    if (data.creditAmount < 12000000) {
+    if (data.creditAmount <= 12000000) {
       firstInstallmentPercentage = 20
     } else {
       rate++
@@ -37,23 +36,23 @@ export default function (test, data) {
       data.region ? 300000 : 500000,
       /* до */
       data.region ? 10000000 : 20000000
-    ],
+    ]
   }
   if (test(conditions, data))
     return {
       rate,
-      'Форма_банка': {
+      Форма_банка: {
         rate: rate + 1.5,
-        firstInstallmentPercentage,
+        firstInstallmentPercentage
       },
-      '2_документа': {
+      "2_документа": {
         rate: rate + 1.5,
-        firstInstallmentPercentage: 30,
+        firstInstallmentPercentage: 30
       },
       ИП: {
-        rate: rate + .5,
-        firstInstallmentPercentage,
-      },
+        rate: rate + 0.5,
+        firstInstallmentPercentage
+      }
     }
 
   return false

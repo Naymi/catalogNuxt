@@ -1,6 +1,5 @@
-export default function (test, data){
-
-  const rate = data.creditAmount < 3000000 ? 11.5 : 11.3
+export default function(test, data) {
+  const rate = data.creditAmount <= 3e6 ? 11.5 : 11.3
   const firstInstallmentPercentage = data.maternalСapital ? 10 : 50
   const conditions = {
     creditTerm: [
@@ -15,24 +14,24 @@ export default function (test, data){
       300000,
       /* до */
       data.region ? 6000000 : 15000000
-    ],
+    ]
   }
-  if (test(conditions,data))
+  if (test(conditions, data))
     return {
       rate,
-      'Форма_банка': {
+      Форма_банка: {
         rate: rate + 0.5,
-        firstInstallmentPercentage,
+        firstInstallmentPercentage
       },
-      '2_документа': data.type == 'Новостройка' && {
-        rate: data.type === 'Новостройка' ? rate + .5 : rate,
-        firstInstallmentPercentage,
+      "2_документа": data.type == "Новостройка" && {
+        rate: data.type === "Новостройка" ? rate + 0.5 : rate,
+        firstInstallmentPercentage
       },
       ИП: {
         rate: rate + 1,
-        firstInstallmentPercentage,
-      },
+        firstInstallmentPercentage
+      }
     }
-  
+
   return false
 }

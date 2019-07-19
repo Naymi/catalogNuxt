@@ -35,7 +35,6 @@ export default function bank({
     if (data.target === 'Квартира') result = target(Квартира)
 
     if (data.target === 'Дом') result = target(Дом)
-    // console.log('bank', result);
     if (result) {
       return {
         ...core,

@@ -1,4 +1,4 @@
-export default function (test, data){
+export default function(test, data) {
   const rate = 11.5
   const firstInstallmentPercentage = 15
   const conditions = {
@@ -14,25 +14,25 @@ export default function (test, data){
       600000,
       /* до */
       data.region ? 12000000 : 15000000
-    ],
+    ]
   }
-  
-  if (test(conditions,data))
+
+  if (test(conditions, data))
     return {
       rate,
-      'Форма_банка': {
+      Форма_банка: {
         rate,
-        firstInstallmentPercentage,
+        firstInstallmentPercentage
       },
-      '2_документа': !data.region && {
+      "2_документа": !data.region && {
         rate: 12.5,
-        firstInstallmentPercentage: 35,
+        firstInstallmentPercentage: 35
       },
       ИП: data.creditTerm <= 15 && {
         rate,
-        firstInstallmentPercentage,
-      },
+        firstInstallmentPercentage
+      }
     }
-  
+
   return false
 }

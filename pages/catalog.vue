@@ -94,7 +94,6 @@ export default {
     },
     completeModal(v) {
       this.parcel.data = v
-      console.log('this.parcel :', this.parcel)
       // return
       this.send()
     },

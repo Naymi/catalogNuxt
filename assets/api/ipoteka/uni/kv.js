@@ -1,5 +1,4 @@
-export default function (test, data){
-
+export default function(test, data) {
   const rate = 9.5
   const firstInstallmentPercentage = data.motherCapital ? 0 : 20
   const conditions = {
@@ -15,21 +14,21 @@ export default function (test, data){
       250000,
       /* до */
       9000000
-    ],
+    ]
   }
-  if (test(conditions,data))
+  if (test(conditions, data))
     return {
       rate,
       Форма_банка: {
         rate,
-        firstInstallmentPercentage,
+        firstInstallmentPercentage
       },
-      '2_документа': {},
+      "2_документа": {},
       ИП: {
         rate,
-        firstInstallmentPercentage,
+        firstInstallmentPercentage
       }
     }
-  
+
   return false
 }

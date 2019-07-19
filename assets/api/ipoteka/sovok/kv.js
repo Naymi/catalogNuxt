@@ -1,12 +1,12 @@
-export default function (test, data){
-  const rate = data.type === 'Новостройка' ? 10.9 : 11.9
-  const firstInstallmentPercentage = 10  
+export default function(test, data) {
+  const rate = data.type === "Новостройка" ? 10.9 : 11.9
+  const firstInstallmentPercentage = 10
   const conditions = {
     creditTerm: [
       /* от */
       1,
       /* до */
-      data.type=='Новостройка' ? 30 : 20
+      data.type == "Новостройка" ? 30 : 20
     ],
     firstInstallmentPercentage,
     creditAmount: [
@@ -14,22 +14,21 @@ export default function (test, data){
       300e3,
       /* до */
       20e6
-    ],
+    ]
   }
-  
-  return(test(conditions,data))&&
-    {
+
+  return (
+    test(conditions, data) && {
       rate,
       Форма_банка: {
         rate,
-        firstInstallmentPercentage: 20,
+        firstInstallmentPercentage: 20
       },
-      '2_документа': {
-
-      },
+      "2_документа": {},
       ИП: {
         rate,
-        firstInstallmentPercentage,
-      },
+        firstInstallmentPercentage
+      }
     }
+  )
 }

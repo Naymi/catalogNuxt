@@ -168,13 +168,15 @@ let masks = [
       thousandsSeparator: ' '
     },
     call(masks, mask) {
-      const firstmask = masks.find(el => el.name === 'firstInstallment').mask
+      const firstmask = masks.find(el => {
+        return el.name == 'firstInstallment'
+      }).mask
+      debugger
       if (mask.typedValue >= mask.masked.min) {
         firstmask.updateOptions({
           min: ~~(mask.typedValue * (this.value.motherCapital ? 0.1 : 0.15)),
           max: mask.typedValue - 500000
         })
-        console.log('firstmask.masked.min :', firstmask.masked.min)
       }
     }
   },
@@ -283,42 +285,22 @@ export default {
   },
   mounted() {
     this.Masks = masks.map(i => {
+      const inp = this.$el.querySelector(`[data-name="${i.name}"] input`)
+      const startValue = inp.value
+      const mask = new IMask(inp, i.params)
+      // debugger
+      mask.on('accept', () => {
+        const tmp = {}
+        tmp[i.name] = mask.typedValue
+        i.call && i.call.call(this, this.Masks, mask)
+        mask.typedValue >= mask.masked.min &&
+          this.$emit('input', { ...this.value, ...tmp })
+      })
+      debugger
+
       return {
         ...i,
-        ...{
-          mask: (() => {
-            console.log('this.mainSelector :', this.mainSelector)
-            console.log('i.name :', i.name)
-            console.log(
-              document.querySelector(`[data-id="${this.mainSelector}"]`)
-            )
-            console.log(this.$el)
-
-            console.log(
-              'mount : ',
-              document.querySelector(
-                `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
-              )
-            )
-            const startValue = document.querySelector(
-              `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
-            ).value
-            const mask = new IMask(
-              document.querySelector(
-                `[data-id="${this.mainSelector}"] [data-name="${i.name}"] input`
-              ),
-              i.params
-            )
-            mask.on('accept', () => {
-              const tmp = {}
-              tmp[i.name] = mask.typedValue
-              i.call && i.call.call(this, masks, mask)
-              mask.typedValue >= mask.masked.min &&
-                this.$emit('input', { ...this.value, ...tmp })
-            })
-            return mask
-          })()
-        }
+        mask
       }
     })
   },

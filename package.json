@@ -5,6 +5,7 @@
   "author": "Anatoly",
   "private": true,
   "scripts": {
+    "prettier": "prettier --write ./*/*/*/*/*.js",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",

@@ -1,23 +1,24 @@
 export default function(test, data) {
-  const rate = 10
-
-  const firstInstallmentPercentage = data.motherCapital ? 10 : 20
-
+  let rate
+  if (data.type === "Вторичка") {
+    rate = (data.firstInstallmentPercentage <= 50 && 12.5) || 11.5
+  } else {
+    rate = (data.firstInstallmentPercentage <= 20 && 11) || 9.7
+  }
+  const firstInstallmentPercentage = data.maternalСapital ? 10 : 15
   const conditions = {
     creditTerm: [
       /* от */
-      5,
+      3,
       /* до */
       30
     ],
-
     firstInstallmentPercentage,
-
     creditAmount: [
       /* от */
-      5e5,
+      500000,
       /* до */
-      30e6
+      data.region ? 15000000 : 30000000
     ]
   }
 
@@ -30,11 +31,11 @@ export default function(test, data) {
       },
       "2_документа": {
         rate: rate + 0.5,
-        firstInstallmentPercentage: data.type == "Новостройка" ? 40 : 50
+        firstInstallmentPercentage: 35
       },
       ИП: {
-        rate: rate + 1,
-        firstInstallmentPercentage
+        rate: rate,
+        firstInstallmentPercentage: 35
       }
     }
 

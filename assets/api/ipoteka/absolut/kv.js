@@ -1,5 +1,4 @@
 export default function(test, data) {
-  console.log("data :", data)
   const rate = 11.5
   const firstInstallmentPercentage = 20
   const conditions = {
@@ -25,7 +24,7 @@ export default function(test, data) {
         rate,
         firstInstallmentPercentage
       },
-      "2_документа": data.creditAmount < 6e6 && {
+      "2_документа": data.creditAmount <= 6e6 && {
         rate: rate + 1,
         firstInstallmentPercentage: 40
       },

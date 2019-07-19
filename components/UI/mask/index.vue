@@ -13,7 +13,6 @@ export default {
   },
   mounted() {
     let propMask = this.regExp ? new RegExp(this.mask) : this.mask
-    console.log('propMask :', propMask)
     let input = this.input || this.getInput(this)
     let mask = new IMask(input, {
       mask: propMask,

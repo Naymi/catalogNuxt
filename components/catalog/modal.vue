@@ -105,7 +105,6 @@ export default {
   },
   methods: {
     checkForm(v) {
-      console.log('this.valid :', this.valid);
       this.valid && this.$emit('complete', this.person)
       event.preventDefault()
     },
