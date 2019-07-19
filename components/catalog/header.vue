@@ -52,9 +52,11 @@ header.header.color-white
               background: 'red',
               "box-shadow": '0 3px 8px 1px rgba(46, 41, 42, 0.31)',
               "border-radius": '10px',
-              "background-color": '#ac1c1d'
+              "background-color": '#ac1c1d',
+              "margin-top": "10px",
+              "margin-bottom": "10px"
             }
-          ) Акции и спецпередложения в мае
+          ) Акции и спецпередложения
 </template>
 
 <script>
