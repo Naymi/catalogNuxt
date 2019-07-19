@@ -6,15 +6,15 @@ export default function(test, data) {
       /* от */
       1,
       /* до */
-      30
+      30,
     ],
     firstInstallmentPercentage,
     creditAmount: [
       /* от */
       3e5,
       /* до */
-      50e6
-    ]
+      50e6,
+    ],
   }
 
   return (
@@ -22,16 +22,16 @@ export default function(test, data) {
       rate,
       Форма_банка: {
         rate,
-        firstInstallmentPercentage
+        firstInstallmentPercentage,
       },
-      "2_документа": data.creditAmount <= 6e6 && {
+      '2_документа': data.creditAmount <= 6e6 && {
         rate: rate + 1,
-        firstInstallmentPercentage: 40
+        firstInstallmentPercentage: 40,
       },
       ИП: {
         rate: rate + 1,
-        firstInstallmentPercentage
-      }
+        firstInstallmentPercentage,
+      },
     }
   )
 }

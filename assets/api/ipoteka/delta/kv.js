@@ -8,8 +8,8 @@ export default function(test, data) {
       /* от */
       300000,
       /* до */
-      data.region ? 6000000 : 15000000
-    ]
+      data.region ? 6000000 : 15000000,
+    ],
   }
 
   if (test(conditions, data))
@@ -17,16 +17,16 @@ export default function(test, data) {
       rate,
       Форма_банка: {
         rate: 11.5,
-        firstInstallmentPercentage: 20
+        firstInstallmentPercentage: 20,
       },
-      "2_документа": {
+      '2_документа': {
         rate: 12,
-        firstInstallmentPercentage: 35
+        firstInstallmentPercentage: 35,
       },
       ИП: {
         rate: 11.75,
-        firstInstallmentPercentage: 20
-      }
+        firstInstallmentPercentage: 20,
+      },
     }
 
   return false

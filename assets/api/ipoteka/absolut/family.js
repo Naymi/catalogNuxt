@@ -1,3 +1,3 @@
 export default {
-  default: 5.49
+  default: 5.49,
 }

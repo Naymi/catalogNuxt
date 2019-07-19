@@ -3,7 +3,7 @@ import Target from './target'
 export default function bank({
   Квартира = () => false,
   Дом = () => false,
-  core = false
+  core = false,
 }) {
   if (!core) {
     throw new Error('Не найден core банка')
@@ -22,12 +22,12 @@ export default function bank({
         platesh: calcPlatesh({
           rate,
           creditAmount: data.creditAmount,
-          creditTerm: data.creditTerm
+          creditTerm: data.creditTerm,
         }),
         rate,
         '2_документа': {},
         ИП: {},
-        Форма_банка: {}
+        Форма_банка: {},
       }
     }
     const target = Target(data)
@@ -42,8 +42,8 @@ export default function bank({
         platesh: calcPlatesh({
           rate: result.rate,
           creditAmount: data.creditAmount,
-          creditTerm: data.creditTerm
-        })
+          creditTerm: data.creditTerm,
+        }),
       }
     }
 

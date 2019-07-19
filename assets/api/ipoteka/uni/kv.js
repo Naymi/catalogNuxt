@@ -6,28 +6,28 @@ export default function(test, data) {
       /* от */
       1,
       /* до */
-      30
+      30,
     ],
     firstInstallmentPercentage,
     creditAmount: [
       /* от */
       250000,
       /* до */
-      9000000
-    ]
+      9000000,
+    ],
   }
   if (test(conditions, data))
     return {
       rate,
       Форма_банка: {
         rate,
-        firstInstallmentPercentage
+        firstInstallmentPercentage,
       },
-      "2_документа": {},
+      '2_документа': {},
       ИП: {
         rate,
-        firstInstallmentPercentage
-      }
+        firstInstallmentPercentage,
+      },
     }
 
   return false

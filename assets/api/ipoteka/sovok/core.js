@@ -1,4 +1,4 @@
 export default {
-  name: "Совкомбанк",
-  icon: "/banks_logo/sovok.svg"
+  name: 'Совкомбанк',
+  icon: '/banks_logo/sovok.svg',
 }

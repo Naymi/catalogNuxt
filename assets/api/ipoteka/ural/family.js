@@ -1,4 +1,4 @@
 export default {
   // refinans: 6
-  default: 5.49
+  default: 5.49,
 }

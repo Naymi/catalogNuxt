@@ -1,4 +1,4 @@
 export default {
-  name: "Газпромбанк",
-  icon: "/banks_logo/gazprom.svg"
+  name: 'Газпромбанк',
+  icon: '/banks_logo/gazprom.svg',
 }

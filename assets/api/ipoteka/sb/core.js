@@ -1,4 +1,4 @@
 export default {
-  name: "Сбер",
-  icon: "/banks_logo/sb.svg"
+  name: 'Сбер',
+  icon: '/banks_logo/sb.svg',
 }

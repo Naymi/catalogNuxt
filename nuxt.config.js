@@ -8,13 +8,13 @@ export default {
     __dangerouslyDisableSanitizers: ['script', 'noscript'],
     noscript: [
       {
-        innerHTML: `<div><img src="https://mc.yandex.ru/watch/32288999" style="position:absolute; left:-9999px;" alt="" /></div>`
-      }
+        innerHTML: `<div><img src="https://mc.yandex.ru/watch/32288999" style="position:absolute; left:-9999px;" alt="" /></div>`,
+      },
     ],
     script: [
       {
         innerHTML:
-          '!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?159",t.onload=function(){VK.Retargeting.Init("VK-RTRG-294050-9COPk"),VK.Retargeting.Hit()},document.head.appendChild(t)}();'
+          '!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?159",t.onload=function(){VK.Retargeting.Init("VK-RTRG-294050-9COPk"),VK.Retargeting.Hit()},document.head.appendChild(t)}();',
       },
       {
         innerHTML: `(function (d, w, c) {
@@ -44,11 +44,11 @@ export default {
       } else {
         f();
       }
-    })(document, window, "yandex_metrika_callbacks");`
-      }
+    })(document, window, "yandex_metrika_callbacks");`,
+      },
     ],
     htmlAttrs: {
-      lang: 'ru'
+      lang: 'ru',
     },
     title:
       'Новостройки Владимира от застройщика с ценами | Купить новостройку во Владимире от застройщика',
@@ -59,16 +59,16 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Подберем вам квартиру в новостройках Владимира от проверенных застройщиков, которые строят качественное жилье, не срывают сроки строительства и сдают свои объекты вовремя'
+          'Подберем вам квартиру в новостройках Владимира от проверенных застройщиков, которые строят качественное жилье, не срывают сроки строительства и сдают свои объекты вовремя',
       },
       {
         hid: 'keywords',
         name: 'keywords',
         content:
-          'купить новостройку, новостройки владимира, купить новостройку от застройщика, новостройки от застройщика'
-      }
+          'купить новостройку, новостройки владимира, купить новостройку от застройщика, новостройки от застройщика',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   /*
@@ -93,7 +93,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
   ],
   /*
    ** Axios module configuration
@@ -102,14 +102,14 @@ export default {
     baseURL:
       process.env.NODE_ENV === 'production'
         ? 'https://novostroykivladimira.ru'
-        : undefined
+        : undefined,
     // proxy: true
     // See https://github.com/nuxt-community/axios-module#options
   },
   proxy: {
     '/api': {
-      target: 'https://novostroykivladimira.ru'
-    }
+      target: 'https://novostroykivladimira.ru',
+    },
   },
   /*
    ** Build configuration
@@ -128,6 +128,6 @@ export default {
       //     exclude: /(node_modules)/
       //   })
       // }
-    }
-  }
+    },
+  },
 }

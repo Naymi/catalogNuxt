@@ -3,7 +3,7 @@ import Bank from './models/bank'
 function getBanks(mdata) {
   const data = {
     ...mdata,
-    firstInstallmentPercantage: (mdata.firstInstallment * 100) / mdata.price
+    firstInstallmentPercantage: (mdata.firstInstallment * 100) / mdata.price,
   }
   const Banks = ipotekaBanks
   const banks = Banks.reduce((acc, bank) => {

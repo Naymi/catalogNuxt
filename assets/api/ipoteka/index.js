@@ -30,5 +30,5 @@ export default [
   // zenit,
   // uni,
   tkb,
-  minb
+  minb,
 ]

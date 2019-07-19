@@ -1,6 +1,6 @@
 export default function(test, data) {
   let rate
-  if (data.type === "Вторичка") {
+  if (data.type === 'Вторичка') {
     rate =
       (data.firstInstallmentPercentage <= 20 && 11) ||
       (data.firstInstallmentPercentage <= 30 && 10.25) ||
@@ -14,15 +14,15 @@ export default function(test, data) {
       /* от */
       3,
       /* до */
-      30
+      30,
     ],
     firstInstallmentPercentage,
     creditAmount: [
       /* от */
       500000,
       /* до */
-      data.region ? 15000000 : 30000000
-    ]
+      data.region ? 15000000 : 30000000,
+    ],
   }
 
   if (test(conditions, data))
@@ -30,16 +30,16 @@ export default function(test, data) {
       rate,
       Форма_банка: {
         rate,
-        firstInstallmentPercentage
+        firstInstallmentPercentage,
       },
-      "2_документа": {
+      '2_документа': {
         rate: rate + 0.5,
-        firstInstallmentPercentage: 35
+        firstInstallmentPercentage: 35,
       },
       ИП: {
         rate: rate,
-        firstInstallmentPercentage: 35
-      }
+        firstInstallmentPercentage: 35,
+      },
     }
 
   return false

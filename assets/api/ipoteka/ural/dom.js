@@ -6,31 +6,31 @@ export default function(test, data) {
       /* от */
       3,
       /* до */
-      30
+      30,
     ],
     firstInstallmentPercentage,
     creditAmount: [
       /* от */
       300000,
       /* до */
-      data.region ? 6000000 : 15000000
-    ]
+      data.region ? 6000000 : 15000000,
+    ],
   }
   if (test(conditions, data))
     return {
       rate,
       Форма_банка: {
         rate: rate + 0.5,
-        firstInstallmentPercentage
+        firstInstallmentPercentage,
       },
-      "2_документа": data.type == "Новостройка" && {
-        rate: data.type === "Новостройка" ? rate + 0.5 : rate,
-        firstInstallmentPercentage
+      '2_документа': data.type == 'Новостройка' && {
+        rate: data.type === 'Новостройка' ? rate + 0.5 : rate,
+        firstInstallmentPercentage,
       },
       ИП: {
         rate: rate + 1,
-        firstInstallmentPercentage
-      }
+        firstInstallmentPercentage,
+      },
     }
 
   return false

@@ -8,7 +8,7 @@ export default function(test, data) {
       /* от */
       5,
       /* до */
-      30
+      30,
     ],
 
     firstInstallmentPercentage,
@@ -17,8 +17,8 @@ export default function(test, data) {
       /* от */
       5e5,
       /* до */
-      30e6
-    ]
+      30e6,
+    ],
   }
 
   if (test(conditions, data))
@@ -26,16 +26,16 @@ export default function(test, data) {
       rate,
       Форма_банка: {
         rate,
-        firstInstallmentPercentage
+        firstInstallmentPercentage,
       },
-      "2_документа": {
+      '2_документа': {
         rate: rate + 0.5,
-        firstInstallmentPercentage: data.type == "Новостройка" ? 40 : 50
+        firstInstallmentPercentage: data.type == 'Новостройка' ? 40 : 50,
       },
       ИП: {
         rate: rate + 1,
-        firstInstallmentPercentage
-      }
+        firstInstallmentPercentage,
+      },
     }
 
   return false

@@ -1,4 +1,4 @@
 export default {
-  name: "Райффайзен",
-  icon: "/banks_logo/rayf.svg"
+  name: 'Райффайзен',
+  icon: '/banks_logo/rayf.svg',
 }
