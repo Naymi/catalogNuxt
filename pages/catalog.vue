@@ -7,7 +7,7 @@
     @picknovostroyka='picknovostroyka'
   )
   unready
-  .bold.text-center.fz32(
+  .bold.text-center.fz32#calc(
     data-target='calc'
     style={
       "margin-top": '2em'
@@ -44,6 +44,16 @@ import modal from '~/components/catalog/modal'
 import startValue from '~/assets/startValue'
 import myfooter from '~/components/footer'
 export default {
+  mounted() {
+    if (window && window.location.hash === '#calc') {
+      document
+        .querySelector('#calc')
+        .scrollIntoView({ block: 'start', behavior: 'smooth' })
+      // window.addEventListener('load', () => {
+      // })
+      // debugger
+    }
+  },
   head() {
     return {
       title:
@@ -53,9 +63,9 @@ export default {
           hid: 'description',
           name: 'description',
           content:
-            'Купить квартиру или студию в новостройке во Владимире. Цены на покупку жилья в новых и строящихся домах и ЖК от застройщиков и подрядчиков'
-        }
-      ]
+            'Купить квартиру или студию в новостройке во Владимире. Цены на покупку жилья в новых и строящихся домах и ЖК от застройщиков и подрядчиков',
+        },
+      ],
     }
   },
   components: {
@@ -65,7 +75,7 @@ export default {
     bankList,
     catalogHeader,
     catalogCalc,
-    modal
+    modal,
   },
   computed: {
     banks() {
@@ -76,15 +86,15 @@ export default {
           if (el.rate < acc.minrate) acc.minrate = el.rate
           return acc
         },
-        { minplatesh: Infinity, minrate: Infinity }
+        { minplatesh: Infinity, minrate: Infinity },
       )
       this.data = {
         ...this.data,
         minplatesh,
-        minrate
+        minrate,
       }
       return banks
-    }
+    },
   },
   methods: {
     send() {
@@ -105,10 +115,10 @@ export default {
       this.parcel = {
         from: {
           target: 'Карточка банка',
-          data: v
+          data: v,
         },
         banks: this.banks,
-        creditParams: this.data
+        creditParams: this.data,
       }
       this.modal = true
     },
@@ -116,16 +126,16 @@ export default {
       this.parcel = {
         from: {
           target: 'Карточка ЖК',
-          data: v
-        }
+          data: v,
+        },
       }
       this.modal = true
-    }
+    },
   },
   watch: {
     data(v) {
       this.data.creditAmount = v.price - v.firstInstallment
-    }
+    },
   },
   data() {
     const firstInstallment = startValue.firstInstallment
@@ -133,7 +143,7 @@ export default {
     return {
       parcel: {
         from: null,
-        data: null
+        data: null,
       },
       shksdata,
       modal: false,
@@ -145,9 +155,9 @@ export default {
         motherCapital: false,
         firstInstallment,
         creditTerm: 15,
-        creditAmount: price - firstInstallment
-      }
+        creditAmount: price - firstInstallment,
+      },
     }
-  }
+  },
 }
 </script>

@@ -165,20 +165,19 @@ let masks = [
       min: 700e3,
       max: 20e6,
       scale: 0,
-      thousandsSeparator: ' '
+      thousandsSeparator: ' ',
     },
     call(masks, mask) {
       const firstmask = masks.find(el => {
         return el.name == 'firstInstallment'
       }).mask
-      debugger
       if (mask.typedValue >= mask.masked.min) {
         firstmask.updateOptions({
           min: ~~(mask.typedValue * (this.value.motherCapital ? 0.1 : 0.15)),
-          max: mask.typedValue - 500000
+          max: mask.typedValue - 500000,
         })
       }
-    }
+    },
   },
   {
     name: 'firstInstallment',
@@ -187,14 +186,14 @@ let masks = [
       scale: 0,
       min: ~~(startValue.price * 0.15),
       max: startValue.price - 500e3,
-      thousandsSeparator: ' '
+      thousandsSeparator: ' ',
     },
     call(masks, mask) {
       const v = mask.typedValue
       v <= mask.masked.max &&
         v >= mask.masked.min &&
         (this.value.firstInstallment = v)
-    }
+    },
   },
   {
     name: 'creditTerm',
@@ -203,14 +202,14 @@ let masks = [
       scale: 0,
       min: 3,
       max: 30,
-      thousandsSeparator: ' '
-    }
-  }
+      thousandsSeparator: ' ',
+    },
+  },
 ]
 export default {
   methods: {
     postfixRub,
-    scroll
+    scroll,
   },
   computed: {
     creditAmount() {
@@ -243,9 +242,9 @@ export default {
         this.$emit('input', {
           ...this.value,
           price: v,
-          firstInstallment
+          firstInstallment,
         })
-      }
+      },
     },
     firstInstallment: {
       get() {
@@ -253,7 +252,7 @@ export default {
       },
       set(v) {
         this.$emit('input', { ...this.value, firstInstallment: v })
-      }
+      },
     },
     creditTerm: {
       get() {
@@ -261,7 +260,7 @@ export default {
       },
       set(v) {
         this.$emit('input', { ...this.value, creditTerm: v })
-      }
+      },
     },
     motherCapital: {
       get() {
@@ -278,10 +277,10 @@ export default {
         this.$emit('input', {
           ...this.value,
           motherCapital: v,
-          firstInstallment
+          firstInstallment,
         })
-      }
-    }
+      },
+    },
   },
   mounted() {
     this.Masks = masks.map(i => {
@@ -296,28 +295,27 @@ export default {
         mask.typedValue >= mask.masked.min &&
           this.$emit('input', { ...this.value, ...tmp })
       })
-      debugger
 
       return {
         ...i,
-        mask
+        mask,
       }
     })
   },
   components: {
     inputText,
     inputRange,
-    inputCheck
+    inputCheck,
   },
   props: {
-    value: Object
+    value: Object,
   },
   data() {
     return {
       Masks: null,
-      mainSelector: 'Suka'
+      mainSelector: 'Suka',
     }
-  }
+  },
 }
 </script>
 
