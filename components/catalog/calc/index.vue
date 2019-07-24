@@ -1,5 +1,5 @@
 <template lang="pug">
-.main-container(:data-id='mainSelector').color-white.container-940.box-center
+.main-container.color-white.container-940.box-center
   .section
     .target(
       style={
@@ -30,8 +30,8 @@
         )
         input-range(
           v-model='firstInstallment'
-          :min='~~(price * firstInstallmentKoef)'
-          :max='price - 500000'
+          :min='firstInstallmentMin'
+          :max='firstInstallmentMax'
         )
       .data-input
         input-text(
@@ -50,11 +50,22 @@
         input-check(
           v-model='motherCapital'
         )
+        span(
+          style={
+            "margin-left": '10px',
+            "user-select": 'none',
+            cursor: 'pointer'
+          }
+        ) У меня есть материнский капитал
+      label.data-input.flex.align-center
+        input-check(
+          v-model='family'
+        )
         span(style={
           "margin-left": '10px',
           "user-select": 'none',
           cursor: 'pointer'
-        }) У меня есть материнский капитал
+        }) Семейная ипотека
     .output-data.flex(
       style={
         "margin-top": '10px'
@@ -82,9 +93,13 @@
     .data-output
       .data-output__head Ставка по кредиту от
       .data-output__main {{+value.minrate}}%
-    .data-output
+    .data-output(v-if='this.motherCapital && this.family && this.price <=2.25e6')
+      .data-output__head {{firstInstallmentLabel}}
+      .data-output__main(style='font-size: 12px') Вы можете использовать материнский капитал в качестве первого взноса. В вашем случае дополнительные средства не требуются.
+    .data-output(v-else)
       .data-output__head {{firstInstallmentLabel}}
       .data-output__main {{(+firstInstallment).toLocaleString('ru')}} руб.
+      .data-output__main(v-if='motherCapital && family' style='font-size: 12px') Вы можете использовать материнский капитал в качестве первого взноса, но в вашем случае нужны дополнительные средства.
     button.calc__btn.btn-blue.color-white.text-center(
       @click=`scroll("[data-target='banks']")`
     ) Посмотреть предложения
@@ -212,17 +227,42 @@ export default {
     scroll,
   },
   computed: {
+    firstInstallmentMin() {
+      let tmp =
+        ~~(this.price * this.firstInstallmentKoef) -
+        (this.motherCapital && this.family ? 450e3 : 0)
+      // console.log('tmp :', tmp)
+      if (tmp < 0) {
+        return 0
+      }
+      return tmp
+    },
+    firstInstallmentMax() {
+      // console.log('this.price :', ~~(this.price * 0.2))
+      const r =
+        this.motherCapital && this.family
+          ? +this.price * 0.8 - 450e3
+          : this.price - 500e3
+      console.log('r :', r)
+      return r
+    },
     creditAmount() {
-      return this.price - this.firstInstallment
+      const creditAmount =
+        this.price -
+        this.firstInstallment -
+        (this.family && this.motherCapital ? 450e3 : 0)
+      return creditAmount
     },
     creditTermPostfix() {
       return postfixYear(this.creditTerm)
     },
     firstInstallmentKoef() {
-      return this.motherCapital ? 0.1 : 0.15
+      return this.family ? 0.2 : this.motherCapital ? 0.1 : 0.15
     },
     firstInstallmentLabel() {
-      return `Первый взнос (${this.motherCapital ? 'от 10%' : 'от 15%'})`
+      return this.motherCapital && this.family && this.price <= 2.25e6
+        ? `Первый взнос`
+        : `Первый взнос (${this.motherCapital ? 'от 10%' : 'от 15%'})`
     },
     price: {
       get() {
@@ -243,6 +283,7 @@ export default {
           ...this.value,
           price: v,
           firstInstallment,
+          creditAmount: this.creditAmount,
         })
       },
     },
@@ -251,7 +292,11 @@ export default {
         return this.value.firstInstallment
       },
       set(v) {
-        this.$emit('input', { ...this.value, firstInstallment: v })
+        this.$emit('input', {
+          ...this.value,
+          firstInstallment: v,
+          creditAmount: this.creditAmount,
+        })
       },
     },
     creditTerm: {
@@ -262,18 +307,41 @@ export default {
         this.$emit('input', { ...this.value, creditTerm: v })
       },
     },
+    family: {
+      get() {
+        return this.value.family
+      },
+      set(v) {
+        const koef = this.firstInstallmentKoef
+        const min = this.firstInstallmentMin
+        const max = this.firstInstallmentMax
+        const firstInstallment =
+          this.firstInstallment > min
+            ? this.firstInstallment < max
+              ? this.firstInstallment
+              : max
+            : min
+        this.$emit('input', {
+          ...this.value,
+          family: v,
+          firstInstallment,
+        })
+      },
+    },
     motherCapital: {
       get() {
         return this.value.motherCapital
       },
       set(v) {
         const koef = this.firstInstallmentKoef
+        const min = this.firstInstallmentMin
+        const max = this.firstInstallmentMax
         const firstInstallment =
-          this.firstInstallment > this.price * koef
-            ? this.firstInstallment < this.price - 500e3
+          this.firstInstallment > min
+            ? this.firstInstallment < max
               ? this.firstInstallment
-              : +this.price - 500e3
-            : ~~(this.price * koef)
+              : max
+            : min
         this.$emit('input', {
           ...this.value,
           motherCapital: v,
@@ -313,7 +381,6 @@ export default {
   data() {
     return {
       Masks: null,
-      mainSelector: 'Suka',
     }
   },
 }

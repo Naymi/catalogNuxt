@@ -94,6 +94,7 @@ export default {
   },
   computed: {
     banks() {
+      console.table(this.data)
       const banks = getBanks(this.data)
       const { minplatesh, minrate } = banks.reduce(
         (acc, el) => {
@@ -124,7 +125,7 @@ export default {
     },
     getBanks,
     input(v) {
-      console.log('v :', v)
+      // console.log('v :', v)
     },
     pickbank(v) {
       this.parcel = {
@@ -145,11 +146,6 @@ export default {
         },
       }
       this.modal = true
-    },
-  },
-  watch: {
-    data(v) {
-      this.data.creditAmount = v.price - v.firstInstallment
     },
   },
   data() {

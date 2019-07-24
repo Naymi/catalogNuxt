@@ -88,24 +88,26 @@ export default {
       person: {
         phone: '',
         name: '',
-        email: ''
+        email: '',
       },
       rules: {
         name: /^[а-яё\ ]+$/i,
-        email: /^([a-z0-9]\.?)+@[a-z0-9]+(\.?[a-z])+\.([a-z]{2,})$/i
-      }
+        email: /^([a-z0-9]\.?)+@[a-z0-9]+(\.?[a-z])+\.([a-z]{2,})$/i,
+      },
     }
   },
   props: {
-    value: Boolean
+    value: Boolean,
   },
   components: {
     inputMask,
-    inputText
+    inputText,
   },
   methods: {
     checkForm(v) {
-      this.valid && this.$emit('complete', this.person)
+      this.valid
+        ? this.$emit('complete', this.person)
+        : alert('Данные заполнены некорректно')
       event.preventDefault()
     },
     test(v) {
@@ -114,12 +116,12 @@ export default {
     },
     getPhoneInput: function(that) {
       return [...that.$el.childNodes[0].childNodes[0].childNodes].find(
-        el => el.nodeName === 'INPUT'
+        el => el.nodeName === 'INPUT',
       )
     },
     closeModal(v) {
       event.target.classList.contains('modal-overlay') && (this.v = false)
-    }
+    },
   },
   computed: {
     valid() {
@@ -130,7 +132,7 @@ export default {
       validate = validate.bind(this)
       return {
         text: 'Только кирилица',
-        style: !validate('name') && 'color: red;'
+        style: !validate('name') && 'color: red;',
       }
     },
     v: {
@@ -139,9 +141,9 @@ export default {
       },
       set(v) {
         this.$emit('input', v)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
