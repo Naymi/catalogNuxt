@@ -9,6 +9,7 @@
       required
       :name='name'
       :class='dark ? "dark" : ""'
+      :disabled='disabled'
     )
     .input-info(v-if='subtext' :style='subtext.style') {{subtext.text}}
     .label {{ label }}
@@ -29,7 +30,8 @@ export default {
     'color',
     'dark',
     'subtext',
-    'dontEmit'
+    'dontEmit',
+    'disabled',
   ],
   mounted() {
     this.el = this.$el
@@ -37,7 +39,7 @@ export default {
   data() {
     return {
       focus: false,
-      el: null
+      el: null,
     }
   },
   computed: {
@@ -47,9 +49,9 @@ export default {
       },
       set(v) {
         !this.dontEmit && this.$emit('input', v)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
@@ -98,12 +100,14 @@ $color: white
     border-bottom: 1px solid white
     outline: none
     background: transparent
-
     font: inherit
+    &[disabled]
+      opacity: .2
     &.dark
       border-bottom: 1px solid gray
-
-    &:focus ~ .label, &:valid ~ .label
+    &[disabled] ~ .label
+      opacity: .2 !important
+    &[disabled] ~ .label, &:focus ~ .label, &:valid ~ .label
       top: 0
 
       cursor: default

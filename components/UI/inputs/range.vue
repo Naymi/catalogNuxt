@@ -1,10 +1,10 @@
 <template lang="pug">
-input(type='range' id='INPUT_1' v-model='v').custom-white-range
+input(type='range' :disabled='disabled' v-model='v').custom-white-range
 </template>
 
 <script>
 export default {
-  props: ['value'],
+  props: ['value', 'disabled'],
   computed: {
     v: {
       get() {
@@ -12,9 +12,9 @@ export default {
       },
       set(v) {
         this.$emit('input', v)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
@@ -104,4 +104,6 @@ export default {
   &:focus
     &::-ms-fill-lower, &::-ms-fill-upper
       background: #FFFFFF
+  &[disabled]
+    opacity: .2
 </style>
