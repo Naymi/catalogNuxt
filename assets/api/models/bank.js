@@ -4,6 +4,7 @@ export default function bank({
   Квартира = () => false,
   Дом = () => false,
   core = false,
+  family = {},
 }) {
   if (!core) {
     throw new Error('Не найден core банка')
@@ -11,23 +12,21 @@ export default function bank({
   return function(data) {
     if (data.firstInstallmentPercentage) {
       data.creditAmountPercentage = 100 - data.firstInstallmentPercentage
-    } else {
-      data.firstInstallmentPercentage =
-        (data.firstInstallment / data.price) * 100
     }
     if (data.family) {
-      const rate = 6
-      return {
-        ...core,
-        platesh: calcPlatesh({
-          rate,
+      if (family.default) {
+        const platesh = calcPlatesh({
+          rate: family.default,
           creditAmount: data.creditAmount,
           creditTerm: data.creditTerm,
-        }),
-        rate,
-        '2_документа': {},
-        ИП: {},
-        Форма_банка: {},
+        })
+        return {
+          ...core,
+          platesh,
+          rate: family.default,
+        }
+      } else {
+        return false
       }
     }
     const target = Target(data)
