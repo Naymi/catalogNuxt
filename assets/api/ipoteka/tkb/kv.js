@@ -1,26 +1,14 @@
 export default function(test, data) {
-  let firstInstallmentPercentage
+  let firstInstallmentPercentage =
+    data.region && data.creditAmount <= 10e6 ? 20 : 50
   let rate
-  if (data.firstInstallmentPercentage <= 35) {
-    rate = 10.95
-  } else if (data.firstInstallmentPercentage <= 50) {
-    rate = 10.45
-  } else {
-    rate = 10.2
-  }
-  if (data.region) {
-    if (data.creditAmount <= 5000000) {
-      firstInstallmentPercentage = 20
+  if ((data.creditAmount <= 12e6 && data.region) || data.creditAmount <= 5e6) {
+    if (data.firstInstallmentPercentage <= 30) {
+      rate = 10.95
+    } else if (data.firstInstallmentPercentage <= 40) {
+      rate = 10.45
     } else {
-      rate++
-      firstInstallmentPercentage = 35
-    }
-  } else {
-    if (data.creditAmount <= 12000000) {
-      firstInstallmentPercentage = 20
-    } else {
-      rate++
-      firstInstallmentPercentage = 35
+      rate = 10.2
     }
   }
   const conditions = {
@@ -46,7 +34,7 @@ export default function(test, data) {
         firstInstallmentPercentage,
       },
       '2_документа': {
-        rate: rate + 1.5,
+        rate: rate + 0.5,
         firstInstallmentPercentage: 30,
       },
       ИП: {

@@ -1,5 +1,8 @@
 export default function(test, data) {
-  const rate = 9.5
+  let rate = data.creditAmount >= 5e6 ? 10 : 10.25
+  if (data.type === 'Вторичка') {
+    rate += 0.25
+  }
   const firstInstallmentPercentage = data.motherCapital ? 0 : 20
   const conditions = {
     creditTerm: [
@@ -26,7 +29,7 @@ export default function(test, data) {
       '2_документа': {},
       ИП: {
         rate,
-        firstInstallmentPercentage,
+        firstInstallmentPercentage: 50,
       },
     }
 

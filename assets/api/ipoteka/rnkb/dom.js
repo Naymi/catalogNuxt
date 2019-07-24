@@ -1,7 +1,6 @@
 export default function(test, data) {
-  if (data.type === 'Новостройка') {
-    return false
-  }
+  if (data.type === 'Новостройка') return false
+
   const rate = 11.5
   const firstInstallmentPercentage = 15
   const conditions = {

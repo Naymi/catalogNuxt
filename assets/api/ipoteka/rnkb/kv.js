@@ -28,7 +28,7 @@ export default function(test, data) {
         rate: 12.5,
         firstInstallmentPercentage: 35,
       },
-      ИП: data.creditTerm <= 15 && {
+      ИП: {
         rate,
         firstInstallmentPercentage,
       },

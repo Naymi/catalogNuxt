@@ -1,10 +1,6 @@
 export default function(test, data) {
-  let rate
-  if (data.type === 'Вторичка') {
-    rate = (data.firstInstallmentPercentage <= 50 && 12.5) || 11.5
-  } else {
-    rate = (data.firstInstallmentPercentage <= 20 && 11) || 9.7
-  }
+  if (data.type === 'Новостройка') return false
+  let rate = (data.firstInstallmentPercentage <= 50 && 12.5) || 11.5
   const firstInstallmentPercentage = data.maternalСapital ? 10 : 15
   const conditions = {
     creditTerm: [

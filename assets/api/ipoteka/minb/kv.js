@@ -2,17 +2,7 @@ export default function(test, data) {
   if (data.type == 'Вторичка') {
     return false
   }
-  let rate = 9.75
-  if (data.creditTerm <= 5) {
-    if (data.firstInstallmentPercentage >= 50) {
-      rate = 10.05
-    }
-  } else if (
-    data.firstInstallmentPercentage >= 20 &&
-    data.firstInstallmentPercentage >= 50
-  ) {
-    rate = 10.04
-  }
+  let rate = 10.05
   const firstInstallmentPercentage = 20
   const conditions = {
     creditTerm: [
@@ -37,10 +27,13 @@ export default function(test, data) {
         rate,
         firstInstallmentPercentage,
       },
-      '2_документа': {},
-      ИП: data.creditTerm <= 15 && {
-        rate,
-        firstInstallmentPercentage,
+      '2_документа': data.creditTerm > 5 && {
+        rate: 11,
+        firstInstallmentPercentage: 50,
+      },
+      ИП: {
+        rate: 10.5,
+        firstInstallmentPercentage: 20,
       },
     }
 

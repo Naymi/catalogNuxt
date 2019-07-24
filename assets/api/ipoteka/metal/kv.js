@@ -29,12 +29,12 @@ export default function(test, data) {
         rate,
         firstInstallmentPercentage,
       },
-      '2_документа': data.type === 'Новостройка' && {
-        rate,
+      '2_документа': {
+        rate: rate + 1,
         firstInstallmentPercentage,
       },
       ИП: {
-        rate,
+        rate: rate + 0.5,
         firstInstallmentPercentage,
       },
     }

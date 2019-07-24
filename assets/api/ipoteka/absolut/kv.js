@@ -1,5 +1,5 @@
 export default function(test, data) {
-  const rate = 11.5
+  const rate = 10.24
   const firstInstallmentPercentage = 20
   const conditions = {
     creditTerm: [

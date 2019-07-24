@@ -1,7 +1,7 @@
 export default function(test, data) {
   if (data.type === 'Новостройка') return false
   const rate = 12.5
-  const firstInstallmentPercentage = 50
+  const firstInstallmentPercentage = data.region ? 50 : 40
   const conditions = {
     creditTerm: [
       /* от */
@@ -23,14 +23,14 @@ export default function(test, data) {
       rate,
       Форма_банка: {
         rate: 13,
-        firstInstallmentPercentage: 40,
+        firstInstallmentPercentage,
       },
       '2_документа': {
         rate: 13.5,
         firstInstallmentPercentage: 50,
       },
       ИП: {
-        rate: 13.75,
+        rate: 13.25,
         firstInstallmentPercentage,
       },
     }

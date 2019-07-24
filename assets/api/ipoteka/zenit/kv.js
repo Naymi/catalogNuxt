@@ -1,6 +1,7 @@
 export default function(test, data) {
-  const rate = data.type === 'Новостройка' ? 11 : 10.75
-  const firstInstallmentPercentage = data.maternalСapital ? 10 : 20
+  const rate = 10.75
+  const firstInstallmentPercentage =
+    data.type === 'Новостройка' ? (data.maternalKapital ? 15 : 20) : 15
   const conditions = {
     creditTerm: [
       /* от */

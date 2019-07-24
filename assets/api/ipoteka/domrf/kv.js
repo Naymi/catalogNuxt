@@ -2,11 +2,20 @@ export default function(test, data) {
   let rate
   if (data.type === 'Вторичка') {
     rate =
-      (data.firstInstallmentPercentage <= 20 && 11) ||
-      (data.firstInstallmentPercentage <= 30 && 10.25) ||
-      9.8
+      data.firstInstallmentPercentage <= 20
+        ? 11.75
+        : data.firstInstallmentPercentage <= 30
+        ? 10.9
+        : 10.5
   } else {
-    rate = (data.firstInstallmentPercentage <= 20 && 11) || 9.7
+    rate =
+      data.firstInstallmentPercentage <= 20
+        ? 11.75
+        : data.firstInstallmentPercentage <= 30
+        ? 10.9
+        : data.firstInstallmentPercentage <= 50
+        ? 10.75
+        : 10.5
   }
   const firstInstallmentPercentage = data.maternalСapital ? 10 : 15
   const conditions = {

@@ -1,6 +1,6 @@
 export default function(test, data) {
-  const rate = 11.45
-  const firstInstallmentPercentage = data.maternalСapital ? 10 : 30
+  const rate = 11.75
+  const firstInstallmentPercentage = data.maternalСapital ? 15 : 30
   const conditions = {
     creditTerm: [
       /* от */
@@ -23,15 +23,9 @@ export default function(test, data) {
         rate: rate + 0.5,
         firstInstallmentPercentage,
       },
-      '2_документа':
-        data.creditTerm > 1 && data.creditTerm < 20 && data.region
-          ? data.creditAmount < 6000000
-          : data.creditAmount < 8000000 && {
-              rate,
-              firstInstallmentPercentage: 50,
-            },
+      '2_документа': {},
       ИП: {
-        rate,
+        rate: rate + 1,
         firstInstallmentPercentage,
       },
     }
