@@ -17,6 +17,14 @@ export default {
           '!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?159",t.onload=function(){VK.Retargeting.Init("VK-RTRG-294050-9COPk"),VK.Retargeting.Hit()},document.head.appendChild(t)}();',
       },
       {
+        innerHTML: `</script><!-- Marquiz script start -->
+<script src="//script.marquiz.ru/v1.js" type="application/javascript"></script>
+<script>window.Marquiz = Marquiz
+console.log()
+</script>
+<!-- Marquiz script end --><script>`,
+      },
+      {
         innerHTML: `(function (d, w, c) {
       (w[c] = w[c] || []).push(function () {
         try {

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .shk(v-if='shk.name!=="card"' @click='$emit("click", shk)')
+  .shk(v-if='shk.name!=="card"' @click='showQuiz')
     .shk__sale(v-if='index===0')
       img(src='~/static/img/sale.png' alt='')
     .shk-img
@@ -38,23 +38,26 @@ export default {
     }
   },
   components: {
-    gallery
+    gallery,
   },
   props: {
     shk: Object,
-    index: Number
+    index: Number,
   },
   data() {
     return {
-      romanNumber
+      romanNumber,
     }
   },
   methods: {
+    showQuiz() {
+      this.shk.quiz && window.Marquiz.showModal(this.shk.quiz)
+    },
     getQ(v) {
       v = new Date(v)
       var m = ~~(v.getMonth() / 3)
       return this.romanNumber[m > 4 ? m - 4 : m]
-    }
-  }
+    },
+  },
 }
 </script>

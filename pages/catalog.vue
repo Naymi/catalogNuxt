@@ -36,7 +36,7 @@
 import catalogHeader from '~/components/catalog/header'
 import shks from '~/components/catalog/shks'
 import unready from '~/components/catalog/unready'
-import shksdata from '~/assets/api/shks.json'
+import shksdata from '~/assets/api/shks'
 import catalogCalc from '~/components/catalog/calc'
 import bankList from '~/components/banklist'
 import getBanks from '~/assets/api'
@@ -45,10 +45,25 @@ import startValue from '~/assets/startValue'
 import myfooter from '~/components/footer'
 export default {
   mounted() {
-    if (window && window.location.hash === '#calc') {
-      document
-        .querySelector('#calc')
-        .scrollIntoView({ block: 'start', behavior: 'smooth' })
+    if (window) {
+      if (window.location.hash === '#calc') {
+        document
+          .querySelector('#calc')
+          .scrollIntoView({ block: 'start', behavior: 'smooth' })
+      }
+      // document.addEventListener('DOMContentLoaded', function() {
+      shksdata.forEach(shk => {
+        console.log('shk :', shk)
+        if (shk.quiz) {
+          window.Marquiz.init({
+            id: shk.quiz,
+            autoOpen: false,
+            autoOpenFreq: 'once',
+            openOnExit: false,
+          })
+        }
+      })
+      // })
       // window.addEventListener('load', () => {
       // })
       // debugger
