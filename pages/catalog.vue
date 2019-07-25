@@ -53,7 +53,7 @@ export default {
       }
       // document.addEventListener('DOMContentLoaded', function() {
       shksdata.forEach(shk => {
-        console.log('shk :', shk)
+        // console.log('shk :', shk)
         if (shk.quiz) {
           window.Marquiz.init({
             id: shk.quiz,
@@ -94,7 +94,6 @@ export default {
   },
   computed: {
     banks() {
-      console.table(this.data)
       const banks = getBanks(this.data)
       const { minplatesh, minrate } = banks.reduce(
         (acc, el) => {
@@ -161,6 +160,7 @@ export default {
       data: {
         type: 'Новостройка',
         target: 'Квартира',
+        family: false,
         price,
         region: true,
         motherCapital: false,

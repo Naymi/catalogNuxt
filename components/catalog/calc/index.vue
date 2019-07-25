@@ -17,8 +17,8 @@
         )
         input-range(
           v-model='price'
-          max='10000000'
-          min='900000'
+          :max='priceMax'
+          :min='priceMin'
         )
       .data-input
         input-text(
@@ -93,13 +93,11 @@
     .data-output
       .data-output__head Ставка по кредиту от
       .data-output__main {{+value.minrate}}%
-    .data-output(v-if='this.motherCapital && this.family && this.price <=2.25e6')
-      .data-output__head {{firstInstallmentLabel}}
-      .data-output__main(style='font-size: 12px') Вы можете использовать материнский капитал в качестве первого взноса. В вашем случае дополнительные средства не требуются.
-    .data-output(v-else)
+    .data-output
       .data-output__head {{firstInstallmentLabel}}
       .data-output__main {{(+firstInstallment).toLocaleString('ru')}} руб.
-      .data-output__main(v-if='motherCapital && family' style='font-size: 12px') Вы можете использовать материнский капитал в качестве первого взноса, но в вашем случае нужны дополнительные средства.
+      .data-output__main(v-if='firstInstallmentMin' style='font-size: 12px') Вы можете использовать материнский капитал в качестве первого взноса, но в вашем случае нужны дополнительные средства.
+      .data-output__main(v-else style='font-size: 12px') Вы можете использовать материнский капитал в качестве первого взноса. В вашем случае дополнительные средства не требуются. 
     button.calc__btn.btn-blue.color-white.text-center(
       @click=`scroll("[data-target='banks']")`
     ) Посмотреть предложения
@@ -227,23 +225,65 @@ export default {
     scroll,
   },
   computed: {
+    priceMax() {
+      return 10e6
+    },
+    priceMin() {
+      const minPrice = this.family && this.motherCapital ? 950e3 : 700e3
+      if (this.Masks) {
+        const mask = this.Masks.find(mask => mask.name === 'price').mask
+        mask.updateOptions({
+          min: minPrice,
+          // max: this.priceMax,
+        })
+        mask.updateValue(this.price)
+      }
+      return minPrice
+    },
     firstInstallmentMin() {
       let tmp =
         ~~(this.price * this.firstInstallmentKoef) -
         (this.motherCapital && this.family ? 450e3 : 0)
       // console.log('tmp :', tmp)
       if (tmp < 0) {
-        return 0
+        tmp = 0
+      }
+      if (this.Masks) {
+        const mask = this.Masks.find(mask => mask.name === 'firstInstallment')
+          .mask
+        mask.updateOptions({
+          min: tmp,
+        })
+        const frst = this.firstInstallment
+        mask.updateValue(
+          frst <= this.firstInstallmentMax
+            ? frst >= tmp
+              ? frst
+              : tmp
+            : this.firstInstallmentMax,
+        )
+        // console.log('mask :', mask.updateValue(this.firstInstallment))
+        console.group('firstInstallmentMin')
+        console.log('this.firstInstallment :', this.firstInstallment)
+        console.log('mask :', mask.typedValue)
+        console.groupEnd('firstInstallmentMin')
       }
       return tmp
     },
     firstInstallmentMax() {
-      // console.log('this.price :', ~~(this.price * 0.2))
       const r =
         this.motherCapital && this.family
-          ? +this.price * 0.8 - 450e3
+          ? Math.min(+this.price * 0.8 - 450e3, +this.price - 950e3)
           : this.price - 500e3
-      console.log('r :', r)
+      if (this.Masks) {
+        const mask = this.Masks.find(mask => mask.name === 'firstInstallment')
+          .mask
+        // debugger
+        mask.updateOptions({
+          max: r,
+        })
+      }
+
       return r
     },
     creditAmount() {
@@ -260,9 +300,13 @@ export default {
       return this.family ? 0.2 : this.motherCapital ? 0.1 : 0.15
     },
     firstInstallmentLabel() {
-      return this.motherCapital && this.family && this.price <= 2.25e6
-        ? `Первый взнос`
-        : `Первый взнос (${this.motherCapital ? 'от 10%' : 'от 15%'})`
+      return this.motherCapital && this.family
+        ? `Первый взнос ${
+            this.firstInstallmentMin
+              ? `от ${this.firstInstallmentMin.toLocaleString('ru')} руб.`
+              : ''
+          }`
+        : `Первый взнос (от ${this.firstInstallmentKoef * 100}%)`
     },
     price: {
       get() {
